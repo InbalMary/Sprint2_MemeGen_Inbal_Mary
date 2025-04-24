@@ -54,7 +54,10 @@ function renderMeme() {
         renderImg(img)
 
         curMeme.lines.forEach((line, idx) => {
-            drawText(line.txt, gElCanvas.width / 2, gElCanvas.height / 6)
+            const x = gElCanvas.width / 2
+            const baseY = gElCanvas.height / 6
+            const y = baseY + idx * ((line.size + 10))
+            drawText(line.txt, x, y, line.color, line.strokeColor, line.size)
         })
     }
     console.log('meme', curMeme)
@@ -83,16 +86,16 @@ function renderImg(img) {
 //     var pics = getPics()
 //     var randPic = pics[getRandomIntInclusive(0, pics.length - 1)]
 //     gSelectedImg = randPic
-    
+
 //     setCurImgId(randPic.id)
 //     renderMeme(randPic)
 // }
 
-function drawText(text, x, y) {
-    gCtx.lineWidth = 2
-    gCtx.strokeStyle = 'brown'
-    gCtx.fillStyle = 'black'
-    gCtx.font = '40px Arial'
+function drawText(text, x, y, color, strokeColor, size) {
+    gCtx.lineWidth = size/10
+    gCtx.strokeStyle = strokeColor
+    gCtx.fillStyle = color
+    gCtx.font = `${size}px Impact`
     gCtx.textAlign = 'center'
     gCtx.textBaseline = 'middle'
 
@@ -103,5 +106,23 @@ function drawText(text, x, y) {
 function onSetSetLineTxt(elInput) {
     console.log('elinput', elInput.value)
     setLineTxt(elInput.value)
+    renderMeme()
+}
+
+function onDownloadCanvas(elLink) {
+    const dataUrl = gElCanvas.toDataURL()
+
+    elLink.href = dataUrl
+    // Set a name for the downloaded file
+    elLink.download = 'my-perfect-img'
+}
+
+function onSetColor(color) {
+    setColor(color)
+    renderMeme()
+}
+
+function onSetStrokeColor(strokeColor) {
+    setStrokeColor(strokeColor)
     renderMeme()
 }

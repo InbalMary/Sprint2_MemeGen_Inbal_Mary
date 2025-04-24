@@ -23,7 +23,13 @@
 
     <section class="meme-editor hide">
         <div class="options">
-            <input oninput="onSetSetLineTxt(this)" class="txt-line" type="text" placeholder="Write your text here"/> 
+            <input oninput="onSetSetLineTxt(this)" class="txt-line" type="text" placeholder="Write your text here" />
+            <a href="#" onclick="onDownloadCanvas(this)" download="file-name">Download</a>
+            <label for="color">Fill color</label>
+            <input type="color" id="color" name="color" value="#000000" onchange="onSetColor(this.value)" />
+            <label for="stroke-color">Stroke color</label>
+            <input type="color" id="stroke-color" name="stroke-color" value="#000000"
+                onchange="onSetStrokeColor(this.value)" />
         </div>
         <div class="canvas-container">
             <canvas width="400" height="400" onmousedown="onDown(event)" onmouseup="onUp()" onmousemove="onDraw(event)"

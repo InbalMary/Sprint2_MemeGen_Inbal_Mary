@@ -9,7 +9,8 @@ var gMeme = {
         {
             txt: 'I sometimes eat Falafel',
             size: 20,
-            color: 'red'
+            color: 'red',
+            strokeColor: 'black'
         }
     ]
 }
@@ -29,4 +30,14 @@ function getCurTxt() {
 
 function setselectedImgId(id) {
     gMeme.selectedImgId = id
+}
+
+function setColor(color) {
+    console.log('color', color)
+    gMeme.lines[gMeme.selectedLineIdx].color = color
+}
+
+function setStrokeColor(strokeColor) {
+    console.log('strokeColor', strokeColor)
+    gMeme.lines[gMeme.selectedLineIdx].strokeColor = strokeColor
 }
