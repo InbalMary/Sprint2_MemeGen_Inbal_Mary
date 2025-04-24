@@ -92,7 +92,7 @@ function renderImg(img) {
 // }
 
 function drawText(text, x, y, color, strokeColor, size) {
-    gCtx.lineWidth = size/10
+    gCtx.lineWidth = size / 10
     gCtx.strokeStyle = strokeColor
     gCtx.fillStyle = color
     gCtx.font = `${size}px Impact`
@@ -124,5 +124,12 @@ function onSetColor(color) {
 
 function onSetStrokeColor(strokeColor) {
     setStrokeColor(strokeColor)
+    renderMeme()
+}
+
+function onChangeTxtSize(sign) {
+    if (sign === '+') setFontSize(+5)
+    if (sign === '-') setFontSize(-5)
+
     renderMeme()
 }

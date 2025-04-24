@@ -41,3 +41,7 @@ function setStrokeColor(strokeColor) {
     console.log('strokeColor', strokeColor)
     gMeme.lines[gMeme.selectedLineIdx].strokeColor = strokeColor
 }
+
+function setFontSize(val) {
+    gMeme.lines[gMeme.selectedLineIdx].size += val
+}
