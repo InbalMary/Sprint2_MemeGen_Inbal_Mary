@@ -4,6 +4,7 @@ var gElCanvas
 var gCtx
 var gIsMouseDown = false
 var gStartPos
+var gSelectedImg
 
 function onInit() {
     gElCanvas = document.querySelector('canvas')
@@ -15,7 +16,7 @@ function onInit() {
 
 function onResize() {
     resizeCanvas()
-    renderMeme()
+    renderRandomMeme()
 }
 
 function resizeCanvas() {
@@ -27,15 +28,27 @@ function onClearCanvas() {
     gCtx.clearRect(0, 0, gElCanvas.width, gElCanvas.height)
 }
 
-function onRenderMeme(picId) {
+
+function onRenderMeme(picId, txt) {
     onClearCanvas()
-    selectPic(picId, 'Write your text here')
+    selectPic(picId, txt)
 }
 
-function renderMeme() {
+function renderMeme(meme = getMeme(), txt = null) {
+    if (!txt) {        
+        txt = getCurTxt()
+        setCurImgId(gSelectedImg.id)
+    } 
+
+    console.log('meme', meme)
+    onRenderMeme(gSelectedImg.id, txt)
+}
+
+function renderRandomMeme() {
     var pics = getPics()
-    var randPicIdx = (pics[getRandomIntInclusive(0, pics.length - 1)]).id
-    onRenderMeme(randPicIdx)
+    var randPic = pics[getRandomIntInclusive(0, pics.length - 1)]
+    gSelectedImg = randPic
+    renderMeme(randPic, 'Write your text here')
 }
 
 function drawText(text, x, y) {
@@ -48,4 +61,10 @@ function drawText(text, x, y) {
 
     gCtx.fillText(text, x, y)
     gCtx.strokeText(text, x, y)
+}
+
+function onSetSetLineTxt(elInput) {
+    console.log('elinput', elInput.value)
+    setLineTxt(elInput.value)
+    renderMeme()
 }

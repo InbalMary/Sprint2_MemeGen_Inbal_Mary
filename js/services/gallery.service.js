@@ -20,6 +20,6 @@ function _createPics() {
 function _createPic(idx) {
     return {
         id: makeId(),
-        data: `imgs/${idx+1}.jpg`
+        url: `imgs/${idx+1}.jpg`
     }
 }

@@ -22,7 +22,9 @@
     <section class="gallery-container"></section>
 
     <section class="meme-editor">
-        <div class="options"></div>
+        <div class="options">
+            <input oninput="onSetSetLineTxt(this)" class="txt-line" type="text" placeholder="Write your text here"/> 
+        </div>
         <div class="canvas-container">
             <canvas width="400" height="400" onmousedown="onDown(event)" onmouseup="onUp()" onmousemove="onDraw(event)"
                 ontouchstart="onDown(event)" ontouchend="onUp()" ontouchmove="onDraw(event)">
