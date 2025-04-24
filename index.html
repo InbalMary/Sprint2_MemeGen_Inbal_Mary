@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meme Generator</title>
+    <link rel="stylesheet" href="/styles/styles.css">
+</head>
+
+<body>
+    <header>
+        <div class="logo">Meme Generator</div>
+        <nav class="main-nav">
+            <ul class="main-nav-list clean-list flex">
+                <li><a href="#">Gallery</a></li>
+                <li><a href="#">About</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="img-gallery"></section>
+
+    <section class="meme-editor">
+        <div class="options"></div>
+        <div class="canvas-container">
+            <canvas width="400" height="400" onmousedown="onDown(event)" onmouseup="onUp()" onmousemove="onDraw(event)"
+                ontouchstart="onDown(event)" ontouchend="onUp()" ontouchmove="onDraw(event)">
+            </canvas>
+        </div>
+    </section>
+
+    <footer>® all rights reseved</footer>
+
+    <script src="js/main.js"></script>
+</body>
+
+</html>
