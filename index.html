@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="/styles/styles.css">
 </head>
 
-<body>
+<body onload="onInit()" onresize="onResize()">
     <header>
         <div class="logo">Meme Generator</div>
         <nav class="main-nav">
@@ -19,7 +19,7 @@
         </nav>
     </header>
 
-    <section class="img-gallery"></section>
+    <section class="gallery-container"></section>
 
     <section class="meme-editor">
         <div class="options"></div>
@@ -32,7 +32,12 @@
 
     <footer>® all rights reseved</footer>
 
-    <script src="js/main.js"></script>
+    <script src="js/services/util.service.js"></script>
+    <script src="js/services/meme.service.js"></script>
+    <script src="js/services/gallery.service.js"></script>
+    <script src="js/controllers/gallery.controller.js"></script>
+    <script src="js/controllers/meme.controller.js"></script>
+
 </body>
 
 </html>
