@@ -1,8 +1,9 @@
 'use strict'
 
 var gImgs = [{ id: 1, url: 'imgs/1.jpg', keywords: ['funny', 'cat'] }]
+
 var gMeme = {
-    selectedImgId: 5,
+    selectedImgId: 2,
     selectedLineIdx: 0,
     lines: [
         {
@@ -26,6 +27,6 @@ function getCurTxt() {
     return gMeme.lines[gMeme.selectedLineIdx].txt
 }
 
-function setCurImgId(id) {
+function setselectedImgId(id) {
     gMeme.selectedImgId = id
 }

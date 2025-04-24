@@ -6,6 +6,16 @@
     width: 50vw;
 }
 
+canvas {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
 img {
     width: 100%;
+}
+
+.hide {
+    display: none;
 }

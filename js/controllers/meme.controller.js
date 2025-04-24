@@ -10,13 +10,14 @@ function onInit() {
     gElCanvas = document.querySelector('canvas')
     gCtx = gElCanvas.getContext('2d')
 
-    onResize()
     renderGallery()
+    // renderRandomMeme()
+    onResize()
 }
 
 function onResize() {
     resizeCanvas()
-    renderRandomMeme()
+    renderMeme()
 }
 
 function resizeCanvas() {
@@ -28,28 +29,64 @@ function onClearCanvas() {
     gCtx.clearRect(0, 0, gElCanvas.width, gElCanvas.height)
 }
 
+function onImgSelect(picId) {
+    const elGallery = document.querySelector('.gallery-container')
+    const elEditor = document.querySelector('.meme-editor')
 
-function onRenderMeme(picId, txt) {
+    elGallery.classList.add('hide')
+    elEditor.classList.remove('hide')
+
     onClearCanvas()
-    selectPic(picId, txt)
+    setselectedImgId(picId)
+    renderMeme()
 }
 
-function renderMeme(meme = getMeme(), txt = null) {
-    if (!txt) {        
-        txt = getCurTxt()
-        setCurImgId(gSelectedImg.id)
-    } 
+function renderMeme() {
+    const curMeme = getMeme()
 
-    console.log('meme', meme)
-    onRenderMeme(gSelectedImg.id, txt)
+    const curImg = getPicById(+curMeme.selectedImgId)
+    console.log('curImg', curImg, curMeme.selectedImgId)
+    console.log('getPics()', getPics())
+    const img = new Image()
+    img.src = curImg.url
+    img.onload = () => {
+        onClearCanvas()
+        renderImg(img)
+
+        curMeme.lines.forEach((line, idx) => {
+            drawText(line.txt, gElCanvas.width / 2, gElCanvas.height / 6)
+        })
+    }
+    console.log('meme', curMeme)
+    img.onerror = () => {
+        console.error('Error loading image:', curImg.url);
+    }
 }
 
-function renderRandomMeme() {
-    var pics = getPics()
-    var randPic = pics[getRandomIntInclusive(0, pics.length - 1)]
-    gSelectedImg = randPic
-    renderMeme(randPic, 'Write your text here')
+function renderImg(img) {
+    const containerWidth = document.querySelector('.canvas-container').offsetWidth
+    gElCanvas.width = containerWidth
+    gElCanvas.height = (img.naturalHeight / img.naturalWidth) * containerWidth
+
+    gCtx.drawImage(img, 0, 0, gElCanvas.width, gElCanvas.height)
 }
+
+
+// function renderMeme(meme = getMeme()) {
+//     var txt = getCurTxt()
+
+//     console.log('meme', meme)
+//     onRenderMeme(gSelectedImg.id, txt)
+// }
+
+// function renderRandomMeme() {
+//     var pics = getPics()
+//     var randPic = pics[getRandomIntInclusive(0, pics.length - 1)]
+//     gSelectedImg = randPic
+    
+//     setCurImgId(randPic.id)
+//     renderMeme(randPic)
+// }
 
 function drawText(text, x, y) {
     gCtx.lineWidth = 2
