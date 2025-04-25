@@ -37,8 +37,9 @@
             
         </div>
         <div class="canvas-container">
-            <canvas width="400" height="400" onmousedown="onDown(event)" onmouseup="onUp()" onmousemove="onDraw(event)"
-                ontouchstart="onDown(event)" ontouchend="onUp()" ontouchmove="onDraw(event)">
+            <canvas onclick="onCanvasClick(event)" width="400" height="400" >
+                <!-- onmousedown="onDown(event)" onmouseup="onUp()" onmousemove="onDraw(event)" -->
+                <!-- ontouchstart="onDown(event)" ontouchend="onUp()" ontouchmove="onDraw(event)" -->
             </canvas>
         </div>
     </section>

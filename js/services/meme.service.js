@@ -63,11 +63,18 @@ function addLine() {
         size: 20,
         color: 'red',
         strokeColor: 'black',
-        isSelected: true
+        isSelected: true,
     }
 
     gMeme.lines.push(newLine)
     gMeme.selectedLineIdx = gMeme.lines.length - 1
+}
+
+function getNextLineY() {
+    const lineCount = gMeme.lines.length
+    const baseY = 50
+    const lineSpacing = 50
+    return baseY + lineCount * lineSpacing
 }
 
 function switchLine() {
@@ -80,4 +87,8 @@ function switchLine() {
     gMeme.selectedLineIdx = nextIdx
     lines[nextIdx].isSelected = true
     console.log('gMeme.selectedLineIdx', gMeme.selectedLineIdx)
+}
+
+function setPosition(line, idx, x, y) {
+    gMeme.lines[idx].pos = {x, y}
 }

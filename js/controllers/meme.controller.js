@@ -57,7 +57,9 @@ function renderMeme() {
             const x = gElCanvas.width / 2
             const baseY = gElCanvas.height / 6
             const y = baseY + idx * ((line.size + 10))
-            drawText(line.txt, x, y, line.color, line.strokeColor, line.size, line.isSelected )
+            setPosition(line, idx, x, y)
+            drawText(line)
+            console.log('line.box', line.box)
         })
     }
     console.log('meme', curMeme)
@@ -91,7 +93,11 @@ function renderImg(img) {
 //     renderMeme(randPic)
 // }
 
-function drawText(text, x, y, color, strokeColor, size, isSelected ) {
+function drawText(line) {
+    const { txt, pos, color, strokeColor, size, isSelected } = line
+    const x = pos.x
+    const y = pos.y
+
     gCtx.lineWidth = size / 10
     gCtx.strokeStyle = strokeColor
     gCtx.fillStyle = color
@@ -99,17 +105,22 @@ function drawText(text, x, y, color, strokeColor, size, isSelected ) {
     gCtx.textAlign = 'center'
     gCtx.textBaseline = 'middle'
 
-    gCtx.fillText(text, x, y)
-    gCtx.strokeText(text, x, y)
+    gCtx.fillText(txt, x, y)
+    gCtx.strokeText(txt, x, y)
+
+    const metrics = gCtx.measureText(txt)
+    const padding = 10
+    const width = metrics.width + padding 
+    const height = size + padding 
+    const w = x - width / 2
+    const h = y - size 
+
+    line.w = w
+    line.h = h
+    line.width = width
+    line.height = height
 
     if (isSelected) {
-        const metrics = gCtx.measureText(text)
-        const padding = 10
-        const width = metrics.width + padding
-        const height = size + padding
-        const w = x - width / 2
-        const h = y - size
-
         gCtx.strokeStyle = 'black'
         gCtx.strokeRect(w, h, width, height)
     }
@@ -153,5 +164,27 @@ function onAddLine() {
 
 function onSwitchLine() {
     switchLine()
+    renderMeme()
+}
+
+function onCanvasClick(ev) {
+    console.log('ev', ev)
+    const { offsetX, offsetY, clientX, clientY } = ev
+
+    const idx = getMeme().lines.findIndex(line => {
+        return offsetX >= line.w && offsetX <= line.w + line.width
+            && offsetY >= line.h && offsetY <= line.h + line.height
+    })
+    console.log('idx', idx)
+    if (idx !== -1) {
+        
+        selectLine(idx)
+    }
+}
+
+function selectLine(idx) {
+    gMeme.lines.forEach(line => (line.isSelected = false))
+    gMeme.lines[idx].isSelected = true
+    gMeme.selectedLineIdx = idx
     renderMeme()
 }
