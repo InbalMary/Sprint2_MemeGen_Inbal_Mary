@@ -110,10 +110,10 @@ function drawText(line) {
 
     const metrics = gCtx.measureText(txt)
     const padding = 10
-    const width = metrics.width + padding 
-    const height = size + padding 
+    const width = metrics.width + padding
+    const height = size + padding
     const w = x - width / 2
-    const h = y - size 
+    const h = y - height / 2
 
     line.w = w
     line.h = h
@@ -129,6 +129,7 @@ function drawText(line) {
 function onSetSetLineTxt(elInput) {
     console.log('elinput', elInput.value)
     setLineTxt(elInput.value)
+    updateInput()
     renderMeme()
 }
 
@@ -159,17 +160,19 @@ function onChangeTxtSize(sign) {
 
 function onAddLine() {
     addLine()
+    updateInput()
     renderMeme()
 }
 
 function onSwitchLine() {
     switchLine()
+    updateInput()
     renderMeme()
 }
 
 function onCanvasClick(ev) {
     console.log('ev', ev)
-    const { offsetX, offsetY, clientX, clientY } = ev
+    const { offsetX, offsetY } = ev
 
     const idx = getMeme().lines.findIndex(line => {
         return offsetX >= line.w && offsetX <= line.w + line.width
@@ -177,8 +180,8 @@ function onCanvasClick(ev) {
     })
     console.log('idx', idx)
     if (idx !== -1) {
-        
         selectLine(idx)
+        updateInput()
     }
 }
 
@@ -187,4 +190,15 @@ function selectLine(idx) {
     gMeme.lines[idx].isSelected = true
     gMeme.selectedLineIdx = idx
     renderMeme()
+}
+
+function updateInput() {
+    const elInput = document.querySelector('.txt-line')
+    const line = getCurLine()
+    console.log('line', line, line.txt)
+
+    if (line) {
+        elInput.placeholder = line.txt || 'Write your text here'
+        elInput.value = line.txt
+    }
 }

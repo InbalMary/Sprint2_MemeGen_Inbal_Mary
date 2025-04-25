@@ -28,6 +28,10 @@ function getMeme() {
     return gMeme
 }
 
+function getCurLine() {
+    return gMeme.lines[gMeme.selectedLineIdx]
+}
+
 function setLineTxt(txt) {
     gMeme.lines[gMeme.selectedLineIdx].txt = txt
 }
