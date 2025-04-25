@@ -7,10 +7,18 @@ var gMeme = {
     selectedLineIdx: 0,
     lines: [
         {
+            txt: 'Write your text here',
+            size: 20,
+            color: 'red',
+            strokeColor: 'black',
+            isSelected: true
+        },
+        {
             txt: 'I sometimes eat Falafel',
             size: 20,
             color: 'red',
-            strokeColor: 'black'
+            strokeColor: 'black',
+            isSelected: false
         }
     ]
 }
@@ -44,4 +52,32 @@ function setStrokeColor(strokeColor) {
 
 function setFontSize(val) {
     gMeme.lines[gMeme.selectedLineIdx].size += val
+}
+
+function addLine() {
+    gMeme.lines.forEach(line => line.isSelected = false)
+
+    const newLine =
+    {
+        txt: 'New line added',
+        size: 20,
+        color: 'red',
+        strokeColor: 'black',
+        isSelected: true
+    }
+
+    gMeme.lines.push(newLine)
+    gMeme.selectedLineIdx = gMeme.lines.length - 1
+}
+
+function switchLine() {
+    const lines = gMeme.lines
+    const currIdx = gMeme.selectedLineIdx
+
+    lines[currIdx].isSelected = false
+
+    const nextIdx = (currIdx + 1) % lines.length
+    gMeme.selectedLineIdx = nextIdx
+    lines[nextIdx].isSelected = true
+    console.log('gMeme.selectedLineIdx', gMeme.selectedLineIdx)
 }

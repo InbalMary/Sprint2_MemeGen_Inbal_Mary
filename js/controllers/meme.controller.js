@@ -45,8 +45,8 @@ function renderMeme() {
     const curMeme = getMeme()
 
     const curImg = getPicById(+curMeme.selectedImgId)
-    console.log('curImg', curImg, curMeme.selectedImgId)
-    console.log('getPics()', getPics())
+    // console.log('curImg', curImg, curMeme.selectedImgId)
+    // console.log('getPics()', getPics())
     const img = new Image()
     img.src = curImg.url
     img.onload = () => {
@@ -57,7 +57,7 @@ function renderMeme() {
             const x = gElCanvas.width / 2
             const baseY = gElCanvas.height / 6
             const y = baseY + idx * ((line.size + 10))
-            drawText(line.txt, x, y, line.color, line.strokeColor, line.size)
+            drawText(line.txt, x, y, line.color, line.strokeColor, line.size, line.isSelected )
         })
     }
     console.log('meme', curMeme)
@@ -91,7 +91,7 @@ function renderImg(img) {
 //     renderMeme(randPic)
 // }
 
-function drawText(text, x, y, color, strokeColor, size) {
+function drawText(text, x, y, color, strokeColor, size, isSelected ) {
     gCtx.lineWidth = size / 10
     gCtx.strokeStyle = strokeColor
     gCtx.fillStyle = color
@@ -101,6 +101,18 @@ function drawText(text, x, y, color, strokeColor, size) {
 
     gCtx.fillText(text, x, y)
     gCtx.strokeText(text, x, y)
+
+    if (isSelected) {
+        const metrics = gCtx.measureText(text)
+        const padding = 10
+        const width = metrics.width + padding
+        const height = size + padding
+        const w = x - width / 2
+        const h = y - size
+
+        gCtx.strokeStyle = 'black'
+        gCtx.strokeRect(w, h, width, height)
+    }
 }
 
 function onSetSetLineTxt(elInput) {
@@ -131,5 +143,15 @@ function onChangeTxtSize(sign) {
     if (sign === '+') setFontSize(+5)
     if (sign === '-') setFontSize(-5)
 
+    renderMeme()
+}
+
+function onAddLine() {
+    addLine()
+    renderMeme()
+}
+
+function onSwitchLine() {
+    switchLine()
     renderMeme()
 }
