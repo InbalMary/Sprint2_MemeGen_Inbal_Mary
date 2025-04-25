@@ -8,14 +8,14 @@ var gMeme = {
     lines: [
         {
             txt: 'Write your text here',
-            size: 20,
+            size: 30,
             color: 'red',
             strokeColor: 'black',
             isSelected: true
         },
         {
             txt: 'I sometimes eat Falafel',
-            size: 20,
+            size: 30,
             color: 'red',
             strokeColor: 'black',
             isSelected: false
@@ -64,7 +64,7 @@ function addLine() {
     const newLine =
     {
         txt: 'New line added',
-        size: 20,
+        size: 30,
         color: 'red',
         strokeColor: 'black',
         isSelected: true,

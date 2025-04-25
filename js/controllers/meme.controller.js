@@ -55,8 +55,10 @@ function renderMeme() {
 
         curMeme.lines.forEach((line, idx) => {
             const x = gElCanvas.width / 2
-            const baseY = gElCanvas.height / 6
-            const y = baseY + idx * ((line.size + 10))
+            var y
+            if (idx === 0) y = gElCanvas.height * 0.1
+            else if (idx === 1) y = gElCanvas.height * 0.9
+            else y = gElCanvas.height * 0.35 + idx * ((line.size + 10))
             setPosition(line, idx, x, y)
             drawText(line)
             console.log('line.box', line.box)
@@ -98,10 +100,10 @@ function drawText(line) {
     const x = pos.x
     const y = pos.y
 
-    gCtx.lineWidth = size / 10
+    gCtx.lineWidth = size / 25
     gCtx.strokeStyle = strokeColor
     gCtx.fillStyle = color
-    gCtx.font = `${size}px Impact`
+    gCtx.font = `bold ${size}px David`
     gCtx.textAlign = 'center'
     gCtx.textBaseline = 'middle'
 
