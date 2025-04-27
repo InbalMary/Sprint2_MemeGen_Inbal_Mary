@@ -5,52 +5,86 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Meme Generator</title>
+    <!-- <script src="https://kit.fontawesome.com/0e1421f711.js" crossorigin="anonymous"></script> -->
     <link rel="stylesheet" href="./styles/styles.css">
 </head>
 
-<body onload="onInit()" onresize="onResize()">
-    <header>
-        <div class="logo">Meme Generator</div>
-        <nav class="main-nav">
-            <ul class="main-nav-list clean-list flex">
-                <li><a href="#" onclick="onGallery()">Gallery</a></li>
-                <li><a href="#">About</a></li>
-            </ul>
-        </nav>
+<body class="main-layout" onload="onInit()" onresize="onResize()">
+
+    <div onclick="onToggleMenu()" class="main-screen"></div>
+
+    <header class="main-header full">
+        <div class="header-container flex space-between align-center">
+            <div class="logo"><svg fill="#626262" height="40px" width="40px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="-25.6 -25.6 563.20 563.20" xml:space="preserve" stroke="#000000" stroke-width="0.00512"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g> <g> <path d="M437.019,74.981c-99.815-99.815-262.222-99.815-362.037,0C26.63,123.333,0,187.62,0,256 c0,68.38,26.63,132.667,74.981,181.016C124.889,486.923,190.444,511.88,256,511.88c65.555,0,131.111-24.956,181.019-74.864 C485.37,388.667,512,324.38,512,256C512,187.62,485.37,123.333,437.019,74.981z M423.611,423.611 c-92.426,92.407-242.796,92.407-335.222,0C43.62,378.843,18.963,319.315,18.963,256c0-63.315,24.657-122.845,69.426-167.613 C134.602,42.183,195.301,19.072,256,19.072c60.699,0,121.398,23.111,167.611,69.315C468.38,133.155,493.037,192.685,493.037,256 C493.037,319.315,468.38,378.843,423.611,423.611z"></path> </g> </g> <g> <g> <path d="M376.681,363.266l-87.141-87.137c-0.007-0.007-0.01-0.014-0.016-0.021c-0.006-0.005-0.014-0.009-0.02-0.014 l-46.908-46.908l-0.004-0.005c0,0-0.002-0.002-0.005-0.002l-46.919-46.917c-0.005-0.005-0.007-0.009-0.012-0.014 c-0.005-0.005-0.01-0.01-0.015-0.014l-46.916-46.912c-3.704-3.704-9.704-3.704-13.407,0c-66.542,66.537-66.542,174.815,0,241.352 c28.357,28.359,64.933,45.493,104.355,49.211c0.95,0.308,1.93,0.502,2.918,0.502c0.571,0,1.14-0.062,1.703-0.164 c3.881,0.262,7.779,0.442,11.705,0.442c45.588,0,88.444-17.75,120.681-49.991C380.384,372.972,380.384,366.97,376.681,363.266z M104.296,256c0-37.345,13.403-72.632,37.931-100.361l33.317,33.315l-71.148,71.148C104.36,258.736,104.296,257.373,104.296,256z M125.286,333.079c-8.948-15.113-15.148-31.65-18.377-48.995c0.563-0.361,1.099-0.778,1.591-1.271l80.452-80.452l33.528,33.528 L125.286,333.079z M148.727,363.266c-4.521-4.519-8.683-9.299-12.551-14.262l99.711-99.709l33.523,33.521l-98.674,98.676 C162.932,376.166,155.554,370.095,148.727,363.266z M239.321,406.771c-18.181-1.977-35.635-7.185-51.719-15.326l95.215-95.22 l33.525,33.525L239.321,406.771z M265.532,407.373l64.218-64.215l26.611,26.609C331.002,392.204,299.324,405.292,265.532,407.373z "></path> </g> </g> <g> <g> <path d="M296.227,95.09c-3.704-3.704-9.704-3.704-13.407,0l-40.227,40.234c-3.704,3.704-3.704,9.701,0,13.405 c1.852,1.854,4.278,2.78,6.704,2.78c2.426,0,4.852-0.926,6.704-2.78l40.227-40.229C299.931,104.796,299.931,98.794,296.227,95.09z "></path> </g> </g> <g> <g> <path d="M403.495,202.359c-3.704-3.704-9.704-3.704-13.407,0l-40.227,40.234c-3.704,3.704-3.704,9.701,0,13.407 c1.852,1.852,4.278,2.775,6.704,2.775c2.426,0,4.852-0.923,6.704-2.775l40.227-40.231 C407.199,212.065,407.199,206.062,403.495,202.359z" ></path> </g> </g> </g></svg> Meme Generator</div>
+            <nav class="main-nav">
+                <ul class="main-nav-list clean-list flex">
+                    <li><a href="#" onclick="onGallery()">Gallery</a></li>
+                    <li><a href="#">About</a></li>
+                </ul>
+            </nav>
+            <button onclick="onToggleMenu()" type="button" class="btn-toggle-menu">☰</button>
+        </div>
     </header>
 
-    <section class="gallery-container"></section>
+    <main class="main-content">
+        <section class="gallery-container"></section>
 
-    <section class="meme-editor hide">
-        <div class="options">
-            <input oninput="onSetSetLineTxt(this)" class="txt-line" type="text" placeholder="Write your text here" />
-            <a href="#" onclick="onDownloadCanvas(this)" download="file-name">Download</a>
-            <label for="color">Fill color</label>
-            <input type="color" id="color" name="color" value="#ff0000" onchange="onSetColor(this.value)" />
-            <label for="stroke-color">Stroke color</label>
-            <input type="color" id="stroke-color" name="stroke-color" value="#000000"
-                onchange="onSetStrokeColor(this.value)" />
-            <button onclick="onChangeTxtSize('+')">+</button>
-            <button onclick="onChangeTxtSize('-')">-</button>
-            <button onclick="onAddLine()">Add Line</button>
-            <button onclick="onSwitchLine()">Switch Line</button>
-            
-        </div>
-        <div class="canvas-container">
-            <canvas onclick="onCanvasClick(event)" width="400" height="400" >
-                <!-- onmousedown="onDown(event)" onmouseup="onUp()" onmousemove="onDraw(event)" -->
-                <!-- ontouchstart="onDown(event)" ontouchend="onUp()" ontouchmove="onDraw(event)" -->
-            </canvas>
-        </div>
-    </section>
+        <section class="meme-editor hide">
+            <div class="canvas-container">
+                <canvas onclick="onCanvasClick(event)" width="400" height="400">
+                    <!-- onmousedown="onDown(event)" onmouseup="onUp()" onmousemove="onDraw(event)" -->
+                    <!-- ontouchstart="onDown(event)" ontouchend="onUp()" ontouchmove="onDraw(event)" -->
+                </canvas>
+            </div>
 
-    <footer>® all rights reseved</footer>
+            <div class="options">
+                <input oninput="onSetSetLineTxt(this)" class="txt-line" type="text"
+                    placeholder="Write your text here" />
+                <div class="lines-edit flex justify-center align-center">
+                    <button onclick="onSwitchLine()"><svg width="56px" height="56px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M7 4V20M7 20L3 16M7 20L11 16M17 20V4M17 4L13 8M17 4L21 8" stroke="#000000" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg></button>
+                    <button onclick="onAddLine()"><svg viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <title>plus</title> <desc>Created with Sketch Beta.</desc> <defs> </defs> <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage"> <g id="Icon-Set-Filled" sketch:type="MSLayerGroup" transform="translate(-362.000000, -1037.000000)" fill="#000000"> <path d="M390,1049 L382,1049 L382,1041 C382,1038.79 380.209,1037 378,1037 C375.791,1037 374,1038.79 374,1041 L374,1049 L366,1049 C363.791,1049 362,1050.79 362,1053 C362,1055.21 363.791,1057 366,1057 L374,1057 L374,1065 C374,1067.21 375.791,1069 378,1069 C380.209,1069 382,1067.21 382,1065 L382,1057 L390,1057 C392.209,1057 394,1055.21 394,1053 C394,1050.79 392.209,1049 390,1049" id="plus" sketch:type="MSShapeGroup"> </path> </g> </g> </g></svg></button>
+                    <button onclick="onDeleteLine()"><svg width="56px" height="56px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M10 11V17" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M14 11V17" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M4 7H20" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M6 7H12H18V18C18 19.6569 16.6569 21 15 21H9C7.34315 21 6 19.6569 6 18V7Z" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M9 5C9 3.89543 9.89543 3 11 3H13C14.1046 3 15 3.89543 15 5V7H9V5Z" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg></button>
+                </div>
+                <div class="lines-edit flex justify-center align-center">
+                    <button onclick="onChangeTxtSize('+')">
+                        <svg fill="#000000" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 499.167 499.168" xml:space="preserve"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g> <g> <path d="M300.057,83.064v-15.3h15.3h24.135L318.851,0H159.117L7.062,499.168h135.157l24.575-105.977h139.769l24.574,105.977 h139.769l-85.312-280.072h-14.217h-15.3v-15.3v-40.713h-40.714h-15.3v-15.3V83.064H300.057z M190.604,291.055l8.449-34.557 c12.286-47.616,24.572-107.513,35.325-158.199h3.072c12.286,49.915,24.576,110.583,36.861,158.199l8.449,34.557H190.604z"></path> <polygon points="492.106,83.064 436.092,83.064 436.092,27.047 371.374,27.047 371.374,83.064 344.152,83.064 315.357,83.064 315.357,147.783 363.868,147.783 371.374,147.783 371.374,172.422 371.374,203.796 380.93,203.796 436.092,203.796 436.092,147.783 492.106,147.783 "></polygon> </g> </g> </g></svg>
+                    </button>
+
+                    <button onclick="onChangeTxtSize('-')">
+                        <svg fill="#000000" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 499.172 499.172" xml:space="preserve"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g> <g> <path d="M166.799,393.194h139.769l24.57,105.978h139.77L368.529,163.083h-53.168h-15.299v-15.3V83.063v-15.3h15.299h24.135 L318.857,0H159.119L7.064,499.172h135.157L166.799,393.194z M199.055,256.501c12.286-47.616,24.572-107.513,35.325-158.199h3.072 c12.286,49.915,24.575,110.583,36.861,158.199l8.449,34.557h-92.156L199.055,256.501z"></path> <polygon points="492.107,83.066 344.156,83.066 315.361,83.066 315.361,147.783 363.869,147.783 492.107,147.783 "></polygon> </g> </g> </g></svg>
+                    </button>
+
+                    <button><svg width="56px" height="56px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M3 10H16M3 14H21M3 18H16M3 6H21" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg></button>
+                    <button><svg width="56px" height="56px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M3 6H21M3 14H21M17 10H7M17 18H7" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg></button>
+                    <button><svg width="56px" height="56px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M8 10H21M3 14H21M8 18H21M3 6H21" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg></button>
+
+                </div>
+                <div class="lines-edit flex justify-center align-center">
+                    <label for="color" class="btn"><svg fill="#000000" width="56px" height="56px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path d="M20 14c-.092.064-2 2.083-2 3.5 0 1.494.949 2.448 2 2.5.906.044 2-.891 2-2.5 0-1.5-1.908-3.436-2-3.5zM9.586 20c.378.378.88.586 1.414.586s1.036-.208 1.414-.586l7-7-.707-.707L11 4.586 8.707 2.293 7.293 3.707 9.586 6 4 11.586c-.378.378-.586.88-.586 1.414s.208 1.036.586 1.414L9.586 20zM11 7.414 16.586 13H5.414L11 7.414z"></path></g></svg></label></label>
+                    <input type="color" id="color" name="color" value="#ff0000" onchange="onSetColor(this.value)" />
+                    <label for="stroke-color" class="btn"><svg width="56px" height="56px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <defs> <style>.cls-1{fill:none;stroke:#020202;stroke-miterlimit:10;stroke-width:1.92px;}</style> </defs> <g id="roll_brush" data-name="roll brush"> <circle class="cls-1" cx="5.73" cy="13.45" r="0.48"></circle> <circle class="cls-1" cx="7.65" cy="18.24" r="0.48"></circle> <circle class="cls-1" cx="6.69" cy="8.65" r="0.48"></circle> <circle class="cls-1" cx="10.52" cy="5.78" r="0.48"></circle> <circle class="cls-1" cx="15.32" cy="6.74" r="0.48"></circle> <circle class="cls-1" cx="18.2" cy="10.57" r="0.48"></circle> <path class="cls-1" d="M22.51,11.86a4.87,4.87,0,0,1-4.86,4.95H16.18a4.28,4.28,0,0,0-3.57,1.91l-1.15,1.72a4.74,4.74,0,0,1-4,2.12h0a4.61,4.61,0,0,1-3.87-2A13.07,13.07,0,0,1,1.41,13.3V12a10.55,10.55,0,0,1,21.1-.15Z"></path> </g> </g></svg>
+                    <input type="color" id="stroke-color" name="stroke-color" value="#000000"
+                        onchange="onSetStrokeColor(this.value)" />
+                </div>
+                <div class="lines-edit flex justify-center align-center">
+                    <a href="#" class="btn" onclick="onDownloadCanvas(this)" download="file-name"><svg width="56px" height="56px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <title></title> <g id="Complete"> <g id="download"> <g> <path d="M3,12.3v7a2,2,0,0,0,2,2H19a2,2,0,0,0,2-2v-7" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path> <g> <polyline data-name="Right" fill="none" id="Right-2" points="7.9 12.3 12 16.3 16.1 12.3" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></polyline> <line fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" x1="12" x2="12" y1="2.7" y2="14.2"></line> </g> </g> </g> </g> </g></svg></a>
+                    <div class="facebook btn"><svg fill="#000000" width="100%" height="100%" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path d="M21.95 5.005l-3.306-.004c-3.206 0-5.277 2.124-5.277 5.415v2.495H10.05v4.515h3.317l-.004 9.575h4.641l.004-9.575h3.806l-.003-4.514h-3.803v-2.117c0-1.018.241-1.533 1.566-1.533l2.366-.001.01-4.256z"></path></g></svg></div>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <footer class="main-footer full flex justify-center align-center">
+        <div class="logo"><svg fill="#626262" height="40px" width="40px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="-25.6 -25.6 563.20 563.20" xml:space="preserve" stroke="#000000" stroke-width="0.00512"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g> <g> <path d="M437.019,74.981c-99.815-99.815-262.222-99.815-362.037,0C26.63,123.333,0,187.62,0,256 c0,68.38,26.63,132.667,74.981,181.016C124.889,486.923,190.444,511.88,256,511.88c65.555,0,131.111-24.956,181.019-74.864 C485.37,388.667,512,324.38,512,256C512,187.62,485.37,123.333,437.019,74.981z M423.611,423.611 c-92.426,92.407-242.796,92.407-335.222,0C43.62,378.843,18.963,319.315,18.963,256c0-63.315,24.657-122.845,69.426-167.613 C134.602,42.183,195.301,19.072,256,19.072c60.699,0,121.398,23.111,167.611,69.315C468.38,133.155,493.037,192.685,493.037,256 C493.037,319.315,468.38,378.843,423.611,423.611z"></path> </g> </g> <g> <g> <path d="M376.681,363.266l-87.141-87.137c-0.007-0.007-0.01-0.014-0.016-0.021c-0.006-0.005-0.014-0.009-0.02-0.014 l-46.908-46.908l-0.004-0.005c0,0-0.002-0.002-0.005-0.002l-46.919-46.917c-0.005-0.005-0.007-0.009-0.012-0.014 c-0.005-0.005-0.01-0.01-0.015-0.014l-46.916-46.912c-3.704-3.704-9.704-3.704-13.407,0c-66.542,66.537-66.542,174.815,0,241.352 c28.357,28.359,64.933,45.493,104.355,49.211c0.95,0.308,1.93,0.502,2.918,0.502c0.571,0,1.14-0.062,1.703-0.164 c3.881,0.262,7.779,0.442,11.705,0.442c45.588,0,88.444-17.75,120.681-49.991C380.384,372.972,380.384,366.97,376.681,363.266z M104.296,256c0-37.345,13.403-72.632,37.931-100.361l33.317,33.315l-71.148,71.148C104.36,258.736,104.296,257.373,104.296,256z M125.286,333.079c-8.948-15.113-15.148-31.65-18.377-48.995c0.563-0.361,1.099-0.778,1.591-1.271l80.452-80.452l33.528,33.528 L125.286,333.079z M148.727,363.266c-4.521-4.519-8.683-9.299-12.551-14.262l99.711-99.709l33.523,33.521l-98.674,98.676 C162.932,376.166,155.554,370.095,148.727,363.266z M239.321,406.771c-18.181-1.977-35.635-7.185-51.719-15.326l95.215-95.22 l33.525,33.525L239.321,406.771z M265.532,407.373l64.218-64.215l26.611,26.609C331.002,392.204,299.324,405.292,265.532,407.373z "></path> </g> </g> <g> <g> <path d="M296.227,95.09c-3.704-3.704-9.704-3.704-13.407,0l-40.227,40.234c-3.704,3.704-3.704,9.701,0,13.405 c1.852,1.854,4.278,2.78,6.704,2.78c2.426,0,4.852-0.926,6.704-2.78l40.227-40.229C299.931,104.796,299.931,98.794,296.227,95.09z "></path> </g> </g> <g> <g> <path d="M403.495,202.359c-3.704-3.704-9.704-3.704-13.407,0l-40.227,40.234c-3.704,3.704-3.704,9.701,0,13.407 c1.852,1.852,4.278,2.775,6.704,2.775c2.426,0,4.852-0.923,6.704-2.775l40.227-40.231 C407.199,212.065,407.199,206.062,403.495,202.359z" ></path> </g> </g> </g></svg> Meme Generator</div>
+        <h4>® all rights reserved</h4></footer>
 
     <script src="js/services/util.service.js"></script>
-    <script src="js/services/meme.service.js"></script>
-    <script src="js/services/gallery.service.js"></script>
     <script src="js/controllers/gallery.controller.js"></script>
     <script src="js/controllers/meme.controller.js"></script>
+    <script src="js/services/meme.service.js"></script>
+    <script src="js/services/gallery.service.js"></script>
+    
 
 </body>
 

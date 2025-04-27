@@ -1,0 +1,49 @@
+button,
+.btn,
+.options .txt-line,
+.options .share>* {
+    background-color: var(--clr-primary--2);
+    color: var(--clr-primary-1);
+    border: none;
+    border-radius: 6px;
+    padding: 8px 12px;
+    font-size: 1em;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.options .share {
+    display: grid;
+    grid-template-rows: 1fr;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1em;
+}
+
+.options .share>*,
+button, .btn {   
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 43px;
+    height: 43px;
+    text-align: center;
+}
+
+.options .share > *:hover,
+button:hover,
+.btn:hover {
+    background-color: var(--clr-primary-3);
+    box-shadow: 0 4px 10px var(--clr-primary-4);
+    cursor: pointer; 
+}
+
+input[type="color"] {
+    display: none;
+}
+
+
+.btn.facebook:hover,
+.facebook:hover svg {
+    background-color: #516FAD;
+    fill: white;
+}

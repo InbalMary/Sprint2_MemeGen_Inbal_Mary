@@ -1,0 +1,15 @@
+.main-header {
+    min-height: 70px;
+    background-color: var(--clr-primary-2);
+    margin-block-end: 1em;
+    border-radius: 5px;
+}
+
+.main-header {
+    display: grid;
+    grid-template-columns: subgrid;
+}
+
+.main-header>* {
+    grid-column: 2;
+}

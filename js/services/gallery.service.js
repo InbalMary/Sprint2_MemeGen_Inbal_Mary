@@ -12,7 +12,7 @@ function getPicById(picId) {
 }
 
 function _createPics() {
-    for(var i=0; i<2; i++){
+    for(var i=0; i<18; i++){
         gPics.push(_createPic(i))
     }
 }

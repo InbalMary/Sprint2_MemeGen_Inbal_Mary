@@ -1,21 +1,24 @@
-* {
-    box-sizing: border-box;
-}
+/* SETUP */
+@import url('./setup/vars.css');
 
-.canvas-container {
-    width: 50vw;
-}
+/* BASICS */
+@import url('./basics/base.css');
+@import url('./basics/helpers.css');
+@import url('./basics/layout.css');
 
-canvas {
-    width: 100%;
-    height: auto;
-    display: block;
-}
+/* COMPONENTS */
+@import url('./components/header.css');
+@import url('./components/logo.css');
+@import url('./components/main-nav.css');
+@import url('./components/footer.css');
+@import url('./components/buttons.css');
+@import url('style/components/burger.css');
+@import url('./components/main-screen.css');
 
-img {
-    width: 100%;
-}
+/* mq */
+@import url('style/setup/mq.css');
 
 .hide {
     display: none;
 }
+

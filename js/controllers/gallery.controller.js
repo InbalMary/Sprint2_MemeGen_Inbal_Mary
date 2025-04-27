@@ -17,6 +17,9 @@ function onGallery(){
     document.querySelector('.gallery-container').classList.remove('hide')
     document.querySelector('.meme-editor').classList.add('hide')
 
+    if (window.innerWidth <= 640) {
+        document.body.classList.remove('menu-open');
+    }
 }
 
 // function selectPic(picId, text = null) {

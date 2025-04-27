@@ -1,0 +1,16 @@
+.main-screen {
+    background-color: rgba(0, 0, 0, 50%);
+    inset: 0;
+    position: fixed;
+    cursor: pointer;
+    pointer-events: none;
+
+    opacity: 0;
+
+    transition: opacity .6s;
+}
+
+body.menu-open .main-screen {
+    opacity: 1;
+    pointer-events: auto;
+}

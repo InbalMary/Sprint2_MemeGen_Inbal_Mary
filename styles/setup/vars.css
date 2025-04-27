@@ -1,0 +1,11 @@
+/* pallette */
+
+:root {
+    --clr-primary--2: whitesmoke;
+    --clr-primary--1: #e5e4e4;
+    --clr-primary-base: #626262;
+    --clr-primary-1: #000;
+    --clr-primary-2: #87dbfa;
+    --clr-primary-3: #c3e0eb;
+    --clr-primary-4: #011c27;
+}
