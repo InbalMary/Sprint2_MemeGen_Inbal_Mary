@@ -7,6 +7,7 @@
     text-decoration: none;
     text-transform: uppercase;
     font-weight: bold;
+    cursor: default;
 }
 
 .main-nav-list a{
