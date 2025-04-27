@@ -11,14 +11,18 @@ var gMeme = {
             size: 30,
             color: 'red',
             strokeColor: 'black',
-            isSelected: true
+            isSelected: true,
+            font: 'David',
+            align: 'center'
         },
         {
             txt: 'I sometimes eat Falafel',
             size: 30,
             color: 'red',
             strokeColor: 'black',
-            isSelected: false
+            isSelected: false,
+            font: 'David',
+            align: 'center'
         }
     ]
 }
@@ -30,6 +34,10 @@ function getMeme() {
 
 function getCurLine() {
     return gMeme.lines[gMeme.selectedLineIdx]
+}
+
+function getCurLineIdx() {
+    return gMeme.selectedLineIdx
 }
 
 function setLineTxt(txt) {
@@ -68,6 +76,8 @@ function addLine() {
         color: 'red',
         strokeColor: 'black',
         isSelected: true,
+        font: 'David',
+        align: 'center'
     }
 
     gMeme.lines.push(newLine)
@@ -94,5 +104,13 @@ function switchLine() {
 }
 
 function setPosition(line, idx, x, y) {
-    gMeme.lines[idx].pos = {x, y}
+    gMeme.lines[idx].pos = { x, y }
+}
+
+function setCurLineFont(fontName) {
+    gMeme.lines[gMeme.selectedLineIdx].font = fontName
+}
+
+function setAlign(align) {
+    gMeme.lines[gMeme.selectedLineIdx].align = align
 }

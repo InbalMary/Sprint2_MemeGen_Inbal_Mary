@@ -5,3 +5,7 @@ footer {
     margin-block-start: 0.5em;
     border-radius: 5px;
 }
+
+footer h4{
+    margin-block-end: 0.25em;
+}

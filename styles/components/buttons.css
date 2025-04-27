@@ -1,9 +1,10 @@
 button,
 .btn,
-.options .txt-line,
+.options .txt-line, select,
 .options .share>* {
     background-color: var(--clr-primary--2);
     color: var(--clr-primary-1);
+    outline: none;
     border: none;
     border-radius: 6px;
     padding: 4px 6px;

@@ -96,26 +96,38 @@ function renderImg(img) {
 // }
 
 function drawText(line) {
-    const { txt, pos, color, strokeColor, size, isSelected } = line
+    const { txt, pos, color, strokeColor, size, isSelected, font, align } = line
     const x = pos.x
     const y = pos.y
 
     gCtx.lineWidth = size / 25
     gCtx.strokeStyle = strokeColor
     gCtx.fillStyle = color
-    gCtx.font = `bold ${size}px David`
-    gCtx.textAlign = 'center'
+    gCtx.font = `bold ${size}px ${font}`
+    // gCtx.textAlign = 'center'
     gCtx.textBaseline = 'middle'
-
-    gCtx.fillText(txt, x, y)
-    gCtx.strokeText(txt, x, y)
 
     const metrics = gCtx.measureText(txt)
     const padding = 10
     const width = metrics.width + padding
     const height = size + padding
-    const w = x - width / 2
-    const h = y - height / 2
+
+    let w, h
+    if (align === 'right') {
+        w = x - width
+        if (w < 0) w = 2
+    } else if (align === 'center') {
+        w = x - width / 2
+        if (w < 0) w = 2
+    } else {
+        w = x
+        if (w + width > gElCanvas.width) w = gElCanvas.width - width - 2
+    }
+
+    h = y - height / 2;
+
+    gCtx.fillText(txt, w, y)
+    gCtx.strokeText(txt, w, y)
 
     line.w = w
     line.h = h
@@ -203,4 +215,14 @@ function updateInput() {
         elInput.placeholder = line.txt || 'Write your text here'
         elInput.value = line.txt
     }
+}
+
+function onSelectFont(fontName) {
+    setCurLineFont(fontName)
+    renderMeme()
+}
+
+function onSetAlign(align) {
+    setAlign(align)
+    renderMeme()
 }
