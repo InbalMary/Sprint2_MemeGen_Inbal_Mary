@@ -5,6 +5,7 @@ var gCtx
 var gIsMouseDown = false
 var gStartPos
 var gSelectedImg
+var gIsRandMode = false
 
 function onInit() {
     gElCanvas = document.querySelector('canvas')
@@ -30,6 +31,14 @@ function onClearCanvas() {
 }
 
 function onImgSelect(picId) {
+    console.log('gIsRandMode', gIsRandMode)
+    if (!gIsRandMode) {
+        setGmem(picId)
+    }
+    if (gIsRandMode) {
+        setRandomGmem(picId)
+        gIsRandMode = false
+    }
     const elGallery = document.querySelector('.gallery-container')
     const elEditor = document.querySelector('.meme-editor')
 
@@ -91,14 +100,16 @@ function renderImg(img) {
 //     onRenderMeme(gSelectedImg.id, txt)
 // }
 
-// function renderRandomMeme() {
-//     var pics = getPics()
-//     var randPic = pics[getRandomIntInclusive(0, pics.length - 1)]
-//     gSelectedImg = randPic
-
-//     setCurImgId(randPic.id)
-//     renderMeme(randPic)
-// }
+function onRenderRandomMeme() {
+    var pics = getPics()
+    var randPic = pics[getRandomIntInclusive(0, pics.length - 1)]
+    gSelectedImg = randPic
+    console.log('randPic.id', randPic.id)
+    // setCurImgId(randPic.id)
+    // setRandomGmem(randPic.id)
+    gIsRandMode = true
+    onImgSelect(randPic.id)
+}
 
 function drawText(line) {
     const { txt, pos, color, strokeColor, size, isSelected, font, align } = line

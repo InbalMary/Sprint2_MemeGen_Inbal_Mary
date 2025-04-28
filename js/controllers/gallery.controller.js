@@ -9,6 +9,9 @@ function renderGallery() {
                 alt="Photo id ${pic.id}"
                 >
     `)
+    strHtmls.unshift(`
+        <button class="flexible-btn" onclick="onRenderRandomMeme()">I'm flexible!</button>
+    `)
     document.querySelector('.gallery-container').innerHTML = strHtmls.join('')
 
 }

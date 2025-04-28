@@ -141,3 +141,54 @@ function moveSpecificLine(lineIdx, dx, dy) {
     gMeme.lines[lineIdx].pos.x += dx
     gMeme.lines[lineIdx].pos.y += dy
 }
+
+function setRandomGmem(picId) {
+    gMeme = {
+        selectedImgId: picId,
+        selectedLineIdx: 0,
+        lines: [
+            {
+                txt:  makeFunnyLorem(),
+                size: 30,
+                color: 'red',
+                strokeColor: 'black',
+                isSelected: true,
+                font: 'David',
+                align: 'center',
+                isDeleted: false,
+                isDrag: false
+            }
+        ]
+    }
+}
+
+function setGmem(picId) {
+    gMeme = {
+        selectedImgId: picId,
+        selectedLineIdx: 0,
+        lines: [
+            {
+                txt: 'Write your text here',
+                size: 30,
+                color: 'red',
+                strokeColor: 'black',
+                isSelected: true,
+                font: 'David',
+                align: 'center',
+                isDeleted: false,
+                isDrag: false
+            },
+            {
+                txt: 'I sometimes eat Falafel',
+                size: 30,
+                color: 'red',
+                strokeColor: 'black',
+                isSelected: false,
+                font: 'David',
+                align: 'center',
+                isDeleted: false,
+                isDrag: false
+            }
+        ]
+    }
+}

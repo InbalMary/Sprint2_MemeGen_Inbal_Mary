@@ -69,3 +69,9 @@ label.btn {
     background-color: #516FAD;
     fill: white;
 }
+
+.flexible-btn {
+    height: 50px;
+    width: 100px;
+    place-self: center;
+}

@@ -19,3 +19,27 @@ function getRandomIntInclusive(min, max) {
 function onToggleMenu() {
     document.body.classList.toggle('menu-open');
 }
+
+function makeFunnyLorem(wordCount = 3) {
+    const funnyWords = [
+        'chips', 'sheep', 'robot', 'coconut', 'alien', 'rat', 'salmon', 'burekas', 'pretzel',
+        'hotdog', 'pizza', 'donut', 'panda', 'sushi', 'lemon', 'apple', 'mango', 'gizmo', 'tiger',
+        'whale', 'zebra', 'peach', 'plum', 'grape', 'skate', 'cheese', 'taco', 'muffin', 'lizard',
+        'honey', 'pumpkin', 'carrot', 'fluff', 'star', 'cloud', 'jelly', 'spicy'
+    ]
+    let str = ''
+    let isNewSentence = true
+    for (let i = 0; i < wordCount; i++) {
+        let word = funnyWords[Math.floor(Math.random() * funnyWords.length)]
+        if (isNewSentence) {
+            word = word.charAt(0).toUpperCase() + word.slice(1)
+            isNewSentence = false
+        }
+        str += word + ' '
+        if (i % 5 === 4) {
+            str = str.trim() + '. '
+            isNewSentence = true
+        }
+    }
+    return str.trim()
+}
