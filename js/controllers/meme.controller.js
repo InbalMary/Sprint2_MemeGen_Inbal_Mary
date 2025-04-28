@@ -54,6 +54,7 @@ function renderMeme() {
         renderImg(img)
 
         curMeme.lines.forEach((line, idx) => {
+            if (!line.isDeleted) {
             const x = gElCanvas.width / 2
             var y
             if (idx === 0) y = gElCanvas.height * 0.1
@@ -61,10 +62,11 @@ function renderMeme() {
             else y = gElCanvas.height * 0.35 + idx * ((line.size + 10))
             setPosition(line, idx, x, y)
             drawText(line)
-            console.log('line.box', line.box)
+            // console.log('line.box', line.box)
+            }
         })
     }
-    console.log('meme', curMeme)
+    // console.log('meme', curMeme)
     img.onerror = () => {
         console.error('Error loading image:', curImg.url);
     }
@@ -208,21 +210,33 @@ function selectLine(idx) {
 
 function updateInput() {
     const elInput = document.querySelector('.txt-line')
+    const elSelect = document.getElementById('font-select')
     const line = getCurLine()
+    if (!line) return
     console.log('line', line, line.txt)
 
-    if (line) {
+    if (elInput) {
         elInput.placeholder = line.txt || 'Write your text here'
         elInput.value = line.txt
+    }
+
+    if (elSelect) {
+        elSelect.value = line.font || ''
     }
 }
 
 function onSelectFont(fontName) {
     setCurLineFont(fontName)
+    updateInput()
     renderMeme()
 }
 
 function onSetAlign(align) {
     setAlign(align)
+    renderMeme()
+}
+
+function onDeleteLine() {
+    deleteLine()
     renderMeme()
 }

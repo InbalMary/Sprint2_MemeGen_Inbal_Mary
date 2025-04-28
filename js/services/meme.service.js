@@ -13,7 +13,8 @@ var gMeme = {
             strokeColor: 'black',
             isSelected: true,
             font: 'David',
-            align: 'center'
+            align: 'center',
+            isDeleted: false
         },
         {
             txt: 'I sometimes eat Falafel',
@@ -22,7 +23,8 @@ var gMeme = {
             strokeColor: 'black',
             isSelected: false,
             font: 'David',
-            align: 'center'
+            align: 'center',
+            isDeleted: false
         }
     ]
 }
@@ -77,7 +79,8 @@ function addLine() {
         strokeColor: 'black',
         isSelected: true,
         font: 'David',
-        align: 'center'
+        align: 'center',
+        isDeleted: false
     }
 
     gMeme.lines.push(newLine)
@@ -113,4 +116,9 @@ function setCurLineFont(fontName) {
 
 function setAlign(align) {
     gMeme.lines[gMeme.selectedLineIdx].align = align
+}
+
+function deleteLine() {
+    const line = gMeme.lines[gMeme.selectedLineIdx]
+    if (line) line.isDeleted = true;
 }
