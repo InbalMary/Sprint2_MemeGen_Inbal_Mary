@@ -320,3 +320,51 @@ function getEvPos(ev) {
     }
     return pos
 }
+
+// Saved Memes
+function onSavedMemesGallery() {
+    document.querySelector('.gallery-container').classList.add('hide')
+    document.querySelector('.meme-editor').classList.add('hide')
+    document.querySelector('.saved-memes-container').classList.remove('hide')
+
+    if (window.innerWidth <= 640) {
+        document.body.classList.remove('menu-open');
+    }
+}
+
+function onSaveMeme() {
+    const preview = gElCanvas.toDataURL('image/jpeg')
+    saveCurMeme(preview)
+}
+
+function showEditor() {
+    document.querySelector('.meme-editor').classList.remove('hide')
+    document.querySelector('.gallery-container').classList.add('hide')
+    document.querySelector('.saved-memes-container').classList.add('hide')
+}
+
+function renderSavedMemes() {
+    const savedMemes = getSavedMemes()
+    var strHtmls = ''
+
+    if (savedMemes.length === 0) {
+        strHtmls = '<p>No saved memes</p>';
+    } else {
+        strHtmls = savedMemes.map(meme => `
+            <article class="meme-item" >
+                <button onclick="onMemeDelete('${meme.memeId}')">X</button>
+
+                <img onclick="onMemeEdit('${meme.memeId}')" src="${meme.preview}" alt="Saved Meme">
+                
+            </article>
+        `)
+
+        document.querySelector('.saved-memes-container').innerHTML = strHtmls.join('');
+    }
+}
+
+function onMemeEdit(memeId) {
+    loadMemeForEditing(memeId)
+    renderMeme()
+    showEditor()
+}

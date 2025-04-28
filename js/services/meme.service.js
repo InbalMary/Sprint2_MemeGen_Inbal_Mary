@@ -2,6 +2,10 @@
 
 var gImgs = [{ id: 1, url: 'imgs/1.jpg', keywords: ['funny', 'cat'] }]
 
+const STORAGE_KEY = 'savedMemesDB'
+
+var gSavedMemes = loadFromStorage(STORAGE_KEY) || []
+
 var gMeme = {
     selectedImgId: 2,
     selectedLineIdx: 0,
@@ -191,4 +195,47 @@ function setGmem(picId) {
             }
         ]
     }
+}
+
+// Saved Memes
+
+function saveCurMeme(preview) {
+    var curMmeme = _createCurMemeToSave(preview)
+    gSavedMemes.unshift(curMmeme)
+
+    saveToStorage(STORAGE_KEY, gSavedMemes)
+    renderSavedMemes()
+}
+
+function _createCurMemeToSave(preview) {
+    const memeToSave = JSON.parse(JSON.stringify(getMeme()))
+    return {
+        memeId: makeId(),
+        preview: preview,
+        memeData: memeToSave,
+        timestamp: Date.now()
+    }
+}
+
+function getSavedMemes() {
+    return gSavedMemes
+}
+
+function saveMemes(updatedMemes) {
+    gSavedMemes = updatedMemes
+    saveToStorage(STORAGE_KEY, gSavedMemes)
+    renderSavedMemes()
+}
+
+function loadMemeForEditing(memeId) {
+    console.log('getSavedMemes(), memeid', getSavedMemes(), memeId)
+    const memeToLoad =  getSavedMemes().find(meme => meme.memeId === memeId)
+    console.log('memeToLoad', memeToLoad)
+    if (!memeToLoad) return null
+    setGmemFromSaved(memeToLoad.memeData)
+    return memeToLoad.memeData
+}
+
+function setGmemFromSaved(meme) {
+    gMeme = meme
 }

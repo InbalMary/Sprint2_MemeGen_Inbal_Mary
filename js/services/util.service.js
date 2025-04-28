@@ -1,5 +1,16 @@
 'use strict'
 
+function saveToStorage(key, val) {
+    console.log('from save:', key, val)
+    localStorage.setItem(key, JSON.stringify(val))
+}
+
+function loadFromStorage(key) {
+    console.log('from load', key)
+    var val = localStorage.getItem(key)
+    return JSON.parse(val)
+}
+
 function makeId(length = 6) {
     const possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
     var id = ''
