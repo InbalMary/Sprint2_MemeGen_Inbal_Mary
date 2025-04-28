@@ -55,14 +55,17 @@ function renderMeme() {
 
         curMeme.lines.forEach((line, idx) => {
             if (!line.isDeleted) {
-            const x = gElCanvas.width / 2
-            var y
-            if (idx === 0) y = gElCanvas.height * 0.1
-            else if (idx === 1) y = gElCanvas.height * 0.9
-            else y = gElCanvas.height * 0.35 + idx * ((line.size + 10))
-            setPosition(line, idx, x, y)
-            drawText(line)
-            // console.log('line.box', line.box)
+
+                if (!line.pos || !line.pos.x || !line.pos.y) {
+                    const x = gElCanvas.width / 2
+                    var y
+                    if (idx === 0) y = gElCanvas.height * 0.1
+                    else if (idx === 1) y = gElCanvas.height * 0.9
+                    else y = gElCanvas.height * 0.35 + idx * ((line.size + 10))
+                    setPosition(line, idx, x, y)
+                }
+                drawText(line)
+                // console.log('line.box', line.box)
             }
         })
     }
@@ -142,7 +145,7 @@ function drawText(line) {
     }
 }
 
-function onSetSetLineTxt(elInput) {
+function onSetLineTxt(elInput) {
     console.log('elinput', elInput.value)
     setLineTxt(elInput.value)
     updateInput()
@@ -199,6 +202,7 @@ function onCanvasClick(ev) {
         selectLine(idx)
         updateInput()
     }
+    return idx
 }
 
 function selectLine(idx) {
@@ -239,4 +243,69 @@ function onSetAlign(align) {
 function onDeleteLine() {
     deleteLine()
     renderMeme()
+}
+
+function onDown(ev) {
+    console.log('onDown')
+    // Get the ev pos from mouse or touch
+    const pos = getEvPos(ev)
+    console.log('pos', pos)
+    const idx = onCanvasClick(ev)
+    if (idx === -1) return
+
+    setLineDrag(idx, true)
+    //Save the pos we start from
+    gStartPos = pos
+    document.body.style.cursor = 'grabbing'
+}
+
+function onMove(ev) {
+    const lines = getLines()
+    const line = lines.find(line => line.isDrag === true)
+
+    if (!line) return
+    console.log('onMove')
+
+    const pos = getEvPos(ev)
+    // Calc the delta, the diff we moved
+    const dx = pos.x - gStartPos.x
+    const dy = pos.y - gStartPos.y
+    const draggedLineIdx = lines.findIndex(line => line.isDrag === true)
+    moveSpecificLine(draggedLineIdx, dx, dy)
+    // Save the last pos, we remember where we`ve been and move accordingly
+    gStartPos = pos
+    // The canvas is render again after every move
+    renderMeme()
+}
+
+function onUp() {
+    console.log('onUp')
+    const lines = getLines()
+    const draggedLineIdx = lines.findIndex(line => line.isDrag === true)
+    if (draggedLineIdx !== -1) {
+        setLineDrag(draggedLineIdx, false)
+    }
+    document.body.style.cursor = 'grab'
+}
+
+function getEvPos(ev) {
+    const TOUCH_EVS = ['touchstart', 'touchmove', 'touchend']
+
+    let pos = {
+        x: ev.offsetX,
+        y: ev.offsetY,
+    }
+
+    if (TOUCH_EVS.includes(ev.type)) {
+        // Prevent triggering the mouse ev
+        ev.preventDefault()
+        // Gets the first touch point
+        ev = ev.changedTouches[0]
+        // Calc the right pos according to the touch screen
+        pos = {
+            x: ev.pageX - ev.target.offsetLeft - ev.target.clientLeft,
+            y: ev.pageY - ev.target.offsetTop - ev.target.clientTop,
+        }
+    }
+    return pos
 }

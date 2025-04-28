@@ -14,7 +14,8 @@ var gMeme = {
             isSelected: true,
             font: 'David',
             align: 'center',
-            isDeleted: false
+            isDeleted: false,
+            isDrag: false
         },
         {
             txt: 'I sometimes eat Falafel',
@@ -24,7 +25,8 @@ var gMeme = {
             isSelected: false,
             font: 'David',
             align: 'center',
-            isDeleted: false
+            isDeleted: false,
+            isDrag: false
         }
     ]
 }
@@ -32,6 +34,10 @@ var gKeywordSearchCountMap = { 'funny': 12, 'cat': 16, 'baby': 2 }
 
 function getMeme() {
     return gMeme
+}
+
+function getLines() {
+    return gMeme.lines
 }
 
 function getCurLine() {
@@ -80,7 +86,8 @@ function addLine() {
         isSelected: true,
         font: 'David',
         align: 'center',
-        isDeleted: false
+        isDeleted: false,
+        isDrag: false
     }
 
     gMeme.lines.push(newLine)
@@ -121,4 +128,16 @@ function setAlign(align) {
 function deleteLine() {
     const line = gMeme.lines[gMeme.selectedLineIdx]
     if (line) line.isDeleted = true;
+}
+
+function setLineDrag(idx, isDrag) {
+    if (idx < 0 || idx >= gMeme.lines.length) return
+    const line = gMeme.lines[idx]
+    line.isDrag = isDrag
+}
+
+function moveSpecificLine(lineIdx, dx, dy) {
+    if (lineIdx < 0) return
+    gMeme.lines[lineIdx].pos.x += dx
+    gMeme.lines[lineIdx].pos.y += dy
 }
