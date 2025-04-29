@@ -97,3 +97,16 @@ input[type="color"] {
     z-index: 10;
     cursor: pointer;
 }
+
+.categories-container {
+    padding: 10px;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.category {
+    margin: 5px;
+    cursor: pointer;
+    display: inline-block;
+    transition: font-size 0.3s ease;
+}

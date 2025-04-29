@@ -7,13 +7,11 @@ _addCategories()
 function getPics() {
     // return gPics
     const allPics = gPics
-    const category = document.getElementById('category-filter').value.toLowerCase()
     const keyword = document.getElementById('search-input').value.toLowerCase()
 
     return allPics.filter(pic => {
         const tags = pic.categories.join(' ').toLowerCase()
-        return (!category || tags.includes(category)) &&
-            (!keyword || tags.includes(keyword))
+        return !keyword || tags.includes(keyword)
     })
 }
 
