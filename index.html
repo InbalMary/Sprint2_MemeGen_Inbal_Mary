@@ -53,8 +53,8 @@
                 </svg> Meme Generator</div>
             <nav class="main-nav">
                 <ul class="main-nav-list clean-list flex">
-                    <li><a href="#" onclick="onSavedMemesGallery()">Saved memes</a></li>
                     <li><a href="#" onclick="onGallery()">Gallery</a></li>
+                    <li><a href="#" onclick="onSavedMemesGallery()">Memes</a></li>
                     <li><a href="#">About</a></li>
                 </ul>
             </nav>
@@ -63,7 +63,30 @@
     </header>
 
     <main class="main-content">
-        <section class="gallery-container"></section>
+        <section class="gallery-container">
+            <div class="filter-controls">
+                <select id="category-filter" onchange="onFilterChange()">
+                    <option value="">All</option>
+                    <option value="women">Women</option>
+                    <option value="men">Men</option>
+                    <option value="baby">Baby</option>
+                    <option value="love">Love</option>
+                    <option value="smile">Smile</option>
+                    <option value="happy">Happy</option>
+                    <option value="funny">Funny</option>
+                    <option value="dog">Dog</option>
+                    <option value="cat">Cat</option>
+                    <option value="cartoon">Cartoon</option>
+                </select>
+            
+                <input type="text" id="search-input" placeholder="Search..." oninput="onFilterChange()">
+            </div>
+                        
+            <div class="gallery-images">
+
+            </div>
+            
+        </section>
 
         <section class="meme-editor hide">
             <div class="canvas-container">
@@ -277,7 +300,7 @@
             </div>
         </section>
 
-        <section class="saved-memes-container hide">saved-memes-container</section>
+        <section class="saved-memes-container hide">No-saved-memes</section>
         
     </main>
 

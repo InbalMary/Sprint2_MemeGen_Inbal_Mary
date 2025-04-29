@@ -40,16 +40,24 @@
         background-color: #ececec;
     }
 
-    body.menu-open .gallery-container {
+    body.menu-open .saved-memes-container,
+    body.menu-open .gallery-images {
         opacity: 0.5;
         filter: blur(2px);
         pointer-events: none;
     }
-     
+    
+    body.menu-open .saved-memes-container img,
     body.menu-open .gallery-container img {
         pointer-events: none;
         transform: none ;
         transition: none ;
+    }
+
+    body.menu-open .filter-controls {
+        pointer-events: auto;
+        opacity: 1;
+        filter: none;
     }
 
     .main-nav .main-nav-list {

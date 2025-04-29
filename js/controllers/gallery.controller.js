@@ -12,7 +12,7 @@ function renderGallery() {
     strHtmls.unshift(`
         <button class="flexible-btn" onclick="onRenderRandomMeme()">I'm flexible!</button>
     `)
-    document.querySelector('.gallery-container').innerHTML = strHtmls.join('')
+    document.querySelector('.gallery-images').innerHTML = strHtmls.join('')
 
 }
 
@@ -38,3 +38,7 @@ function onGallery(){
 
 //     }
 // }
+
+function onFilterChange() {
+    renderGallery()
+}

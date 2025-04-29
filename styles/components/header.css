@@ -1,7 +1,7 @@
 .main-header {
-    min-height: 70px;
+    min-height: 60px;
     background-color: var(--clr-primary-2);
-    margin-block-end: 1em;
+    /* margin-block-end: 1em; */
     border-radius: 5px;
 }
 

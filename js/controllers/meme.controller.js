@@ -358,13 +358,13 @@ function renderSavedMemes() {
                 <img onclick="onMemeEdit('${meme.memeId}')" src="${meme.preview}" alt="Saved Meme">
                 
             </article>
-        `)
-
-        document.querySelector('.saved-memes-container').innerHTML = strHtmls.join('');
+        `).join('') 
     }
+    document.querySelector('.saved-memes-container').innerHTML = strHtmls
 }
 
 function onMemeEdit(memeId) {
+    gSelectedSavedMemeId = memeId
     loadMemeForEditing(memeId)
     renderMeme()
     showEditor()

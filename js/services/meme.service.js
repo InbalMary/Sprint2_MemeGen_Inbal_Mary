@@ -5,6 +5,7 @@ var gImgs = [{ id: 1, url: 'imgs/1.jpg', keywords: ['funny', 'cat'] }]
 const STORAGE_KEY = 'savedMemesDB'
 
 var gSavedMemes = loadFromStorage(STORAGE_KEY) || []
+var gSelectedSavedMemeId = null
 
 var gMeme = {
     selectedImgId: 2,
@@ -200,17 +201,27 @@ function setGmem(picId) {
 // Saved Memes
 
 function saveCurMeme(preview) {
-    var curMmeme = _createCurMemeToSave(preview)
-    gSavedMemes.unshift(curMmeme)
+    if (gSelectedSavedMemeId) {
+        const idx = gSavedMemes.findIndex(meme => meme.memeId === gSelectedSavedMemeId)
+        if (idx !== -1) {
+            gSavedMemes[idx].preview = preview
+        }
+        gSelectedSavedMemeId = null
+    }else {
+        var curMmeme = _createCurMemeToSave(preview, makeId())
+        gSavedMemes.unshift(curMmeme)
+    }
+    
+    
 
     saveToStorage(STORAGE_KEY, gSavedMemes)
     renderSavedMemes()
 }
 
-function _createCurMemeToSave(preview) {
+function _createCurMemeToSave(preview, memeId) {
     const memeToSave = JSON.parse(JSON.stringify(getMeme()))
     return {
-        memeId: makeId(),
+        memeId: memeId,
         preview: preview,
         memeData: memeToSave,
         timestamp: Date.now()
@@ -241,7 +252,8 @@ function setGmemFromSaved(meme) {
 }
 
 function deleteMeme(memeId) {
-    const picIdx = gSavedMemes.findIndex(meme => memeId === meme.memeId)
-    gSavedMemes.splice(picIdx, 1)
+    const memeIdx = gSavedMemes.findIndex(meme => memeId === meme.memeId)
+    if (memeIdx === -1) return
+    gSavedMemes.splice(memeIdx, 1)
     saveToStorage(STORAGE_KEY, gSavedMemes)
 }

@@ -2,7 +2,7 @@
 
 .main-layout {
     display: grid;
-    grid-template-columns: 20px 1fr 20px;
+    grid-template-columns: 40px 1fr 40px;
 
     /* grid-template-columns:
         minmax(30px, 1fr) minmax(auto, 1060px) minmax(30px, 1fr); */
@@ -18,10 +18,11 @@
 }
 
 .saved-memes-container,
-.gallery-container {
+.gallery-images {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 0.5em;
+    place-items: center;
 }
 
 .saved-memes-container {
@@ -73,4 +74,10 @@
 .options .lines-edit {
     gap: 1em;
     height: 43px;
+}
+
+.main-content {
+    display: grid;
+    place-items: center;
+    margin-block: 1em;
 }
