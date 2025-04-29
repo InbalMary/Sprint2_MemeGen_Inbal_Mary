@@ -64,7 +64,7 @@
 
     <main class="main-content">
         <section class="gallery-container">
-            <div class="filter-controls">
+            <div class="filter-controls flex justify-center align-center">
                 <input type="text" id="search-input" list="category-list" placeholder="Search or filter"
                     oninput="onFilterChange()" />
 
@@ -80,11 +80,13 @@
                     <option value="cat">
                     <option value="cartoon">
                 </datalist>
-
+                <div class="categories-container"></div>
+                <button class="btn-show-more" onclick="onToggleCategoriesView()">more...</button>
+                
                 <!-- <input type="text" id="search-input" placeholder="Search..." oninput="onFilterChange()"> -->
             </div>
 
-            <div class="categories-container"></div>
+            
 
             <div class="gallery-images">
 

@@ -17,7 +17,7 @@ var gMeme = {
             color: 'red',
             strokeColor: 'black',
             isSelected: true,
-            font: 'David',
+            font: 'Tahoma',
             align: 'center',
             isDeleted: false,
             isDrag: false
@@ -28,7 +28,7 @@ var gMeme = {
             color: 'red',
             strokeColor: 'black',
             isSelected: false,
-            font: 'David',
+            font: 'Tahoma',
             align: 'center',
             isDeleted: false,
             isDrag: false
@@ -89,7 +89,7 @@ function addLine() {
         color: 'red',
         strokeColor: 'black',
         isSelected: true,
-        font: 'David',
+        font: 'Tahoma',
         align: 'center',
         isDeleted: false,
         isDrag: false
@@ -158,7 +158,7 @@ function setRandomGmem(picId) {
                 color: 'red',
                 strokeColor: 'black',
                 isSelected: true,
-                font: 'David',
+                font: 'Tahoma',
                 align: 'center',
                 isDeleted: false,
                 isDrag: false
@@ -178,7 +178,7 @@ function setGmem(picId) {
                 color: 'red',
                 strokeColor: 'black',
                 isSelected: true,
-                font: 'David',
+                font: 'Tahoma',
                 align: 'center',
                 isDeleted: false,
                 isDrag: false
@@ -189,7 +189,7 @@ function setGmem(picId) {
                 color: 'red',
                 strokeColor: 'black',
                 isSelected: false,
-                font: 'David',
+                font: 'Tahoma',
                 align: 'center',
                 isDeleted: false,
                 isDrag: false

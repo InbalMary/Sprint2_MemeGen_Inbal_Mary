@@ -2,6 +2,7 @@
 
 var gCategories = { 'women': 0, 'men': 0, 'baby': 0, 'smile': 0, 'happy': 0, 'funny': 0, 'love': 0, 'dog': 0, 'cat': 0, 'cartoon': 0 }
 const CATEGORIES_STORAGE_KEY = 'popularCategoriesDB'
+let gShowAllKeywords = false
 
 function renderGallery() {
     var pics = getPics()
@@ -19,13 +20,21 @@ function renderGallery() {
     renderCategories()
 }
 
+function onToggleCategoriesView() {
+    gShowAllKeywords = !gShowAllKeywords
+    renderCategories()
+    document.querySelector('.btn-show-more').innerText = gShowAllKeywords ? 'less...' : 'more...'
+}
+
+
 function renderCategories() {
     const elContainer = document.querySelector('.categories-container')
-    const keywords = Object.keys(gCategories)
+    const entries = Object.entries(gCategories)
 
-    const strHtml = keywords.map(keyword => {
-        const count = gCategories[keyword]
-        const fontSize = 12 + count * 2
+    const keywordsToShow = gShowAllKeywords ? entries : entries.slice(0, 4)
+
+    const strHtml = keywordsToShow.map(([keyword, count]) => {
+        const fontSize = 14 + count * 1.5
         return `<span class="category" style="font-size:${fontSize}px" onclick="onCategoryClick('${keyword}')">${keyword}</span>`
     }).join(' ')
 
