@@ -239,3 +239,9 @@ function loadMemeForEditing(memeId) {
 function setGmemFromSaved(meme) {
     gMeme = meme
 }
+
+function deleteMeme(memeId) {
+    const picIdx = gSavedMemes.findIndex(meme => memeId === meme.memeId)
+    gSavedMemes.splice(picIdx, 1)
+    saveToStorage(STORAGE_KEY, gSavedMemes)
+}

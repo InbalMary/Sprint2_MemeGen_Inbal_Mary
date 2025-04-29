@@ -17,10 +17,15 @@
     grid-column: 1 / -1;
 }
 
+.saved-memes-container,
 .gallery-container {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 0.5em;
+}
+
+.saved-memes-container {
+    grid-template-columns: repeat(auto-fit, 200px);
 }
 
 .meme-editor {

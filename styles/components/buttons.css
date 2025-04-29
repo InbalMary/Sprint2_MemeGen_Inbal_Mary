@@ -1,6 +1,7 @@
 button,
 .btn,
-.options .txt-line, select,
+.options .txt-line,
+select,
 .options .share>* {
     background-color: var(--clr-primary--2);
     color: var(--clr-primary-1);
@@ -20,7 +21,8 @@ button,
 }
 
 .options .share>*,
-button, .btn {   
+button,
+.btn {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -30,12 +32,12 @@ button, .btn {
     text-align: center;
 }
 
-.options .share > *:hover,
+.options .share>*:hover,
 button:hover,
 .btn:hover {
     background-color: var(--clr-primary-3);
     box-shadow: 0 4px 10px var(--clr-primary-4);
-    cursor: pointer; 
+    cursor: pointer;
 }
 
 label.btn {
@@ -46,23 +48,23 @@ label.btn {
     overflow: hidden;
     vertical-align: middle;
     cursor: pointer;
-  }
-  
-  label.btn svg {
+}
+
+label.btn svg {
     width: 100%;
     height: 100%;
     object-fit: contain;
     display: block;
-  }
-  
-  input[type="color"] {
+}
+
+input[type="color"] {
     opacity: 0;
     width: 0;
     height: 0;
     padding: 0;
     margin: 0;
     border: none;
-  }
+}
 
 .btn.facebook:hover,
 .facebook:hover svg {
@@ -74,4 +76,24 @@ label.btn {
     height: 50px;
     width: 100px;
     place-self: center;
+}
+
+.meme-item {
+    position: relative;
+}
+
+.meme-item img {
+    transition: opacity 0.3s ease;
+}
+
+.meme-item:hover img {
+    opacity: 1;
+}
+
+.saved-memes-container .delete-btn {
+    position: absolute;
+    top: 3px;
+    right: 3px;
+    z-index: 10;
+    cursor: pointer;
 }

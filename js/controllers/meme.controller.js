@@ -323,6 +323,7 @@ function getEvPos(ev) {
 
 // Saved Memes
 function onSavedMemesGallery() {
+    renderSavedMemes()
     document.querySelector('.gallery-container').classList.add('hide')
     document.querySelector('.meme-editor').classList.add('hide')
     document.querySelector('.saved-memes-container').classList.remove('hide')
@@ -352,7 +353,7 @@ function renderSavedMemes() {
     } else {
         strHtmls = savedMemes.map(meme => `
             <article class="meme-item" >
-                <button onclick="onMemeDelete('${meme.memeId}')">X</button>
+                <button class="delete-btn" onclick="onMemeDelete(event, '${meme.memeId}')">X</button>
 
                 <img onclick="onMemeEdit('${meme.memeId}')" src="${meme.preview}" alt="Saved Meme">
                 
@@ -367,4 +368,11 @@ function onMemeEdit(memeId) {
     loadMemeForEditing(memeId)
     renderMeme()
     showEditor()
+}
+
+function onMemeDelete(ev, memeId) {
+    ev.stopPropagation()
+    console.log('event', ev, memeId)
+    deleteMeme(memeId)
+    renderSavedMemes()
 }
