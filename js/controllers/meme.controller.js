@@ -7,6 +7,10 @@ var gStartPos
 var gSelectedImg
 var gIsRandMode = false
 
+const gStickers = ['😎', '😂', '🔥', '😍', '🥦', '🚩', '🐶', '🌈', '🤓', '👑', '⭐', '😉', '📚']
+let gStickerStartIdx = 0
+const STICKERS_TO_SHOW = 4
+
 function onInit() {
     gElCanvas = document.querySelector('canvas')
     gCtx = gElCanvas.getContext('2d')
@@ -45,7 +49,7 @@ function onImgSelect(picId) {
 
     elGallery.classList.add('hide')
     elEditor.classList.remove('hide')
-
+    document.querySelector('.txt-line').value = getCurLine().txt
     onClearCanvas()
     setselectedImgId(picId)
     renderMeme()
@@ -83,6 +87,7 @@ function renderMeme() {
     img.onerror = () => {
         console.error('Error loading image:', curImg.url);
     }
+    renderStickers()
 }
 
 function renderImg(img) {
@@ -359,7 +364,7 @@ function renderSavedMemes() {
                 <img onclick="onMemeEdit('${meme.memeId}')" src="${meme.preview}" alt="Saved Meme">
                 
             </article>
-        `).join('') 
+        `).join('')
     }
     document.querySelector('.saved-memes-container').innerHTML = strHtmls
 }
@@ -369,6 +374,7 @@ function onMemeEdit(memeId) {
     loadMemeForEditing(memeId)
     renderMeme()
     showEditor()
+    document.querySelector('.txt-line').value = getCurLine().txt
 }
 
 function onMemeDelete(ev, memeId) {
@@ -376,4 +382,37 @@ function onMemeDelete(ev, memeId) {
     console.log('event', ev, memeId)
     deleteMeme(memeId)
     renderSavedMemes()
+}
+
+// Stickers
+
+function renderStickers() {
+    const elContainer = document.querySelector('.stickers-container')
+    const stickersToShow = gStickers.slice(gStickerStartIdx, gStickerStartIdx + STICKERS_TO_SHOW)
+
+    const strHtml = stickersToShow.map(sticker =>
+        `<button class="sticker-btn" onclick="onAddSticker('${sticker}')">${sticker}</button>`
+    ).join('')
+
+    elContainer.innerHTML = strHtml
+}
+
+function onNextStickers() {
+    if (gStickerStartIdx + STICKERS_TO_SHOW < gStickers.length) {
+        gStickerStartIdx++
+        renderStickers()
+    }
+}
+
+function onPrevStickers() {
+    if (gStickerStartIdx > 0) {
+        gStickerStartIdx--
+        renderStickers()
+    }
+}
+
+function onAddSticker(sticker) {
+    addLine(sticker)
+    updateInput()
+    renderMeme()
 }

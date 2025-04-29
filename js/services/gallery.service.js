@@ -10,9 +10,9 @@ function getPics() {
     const keyword = document.getElementById('search-input').value.toLowerCase()
 
     return allPics.filter(pic => {
-        const tags = pic.categories.join(' ').toLowerCase()
-        return !keyword || tags.includes(keyword)
+        return !keyword || pic.categories.map(cat => cat.toLowerCase()).includes(keyword)
     })
+    
 }
 
 function getPicById(picId) {

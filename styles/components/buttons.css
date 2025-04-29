@@ -111,3 +111,7 @@ input[type="color"] {
     display: inline-block;
     transition: font-size 0.3s ease;
 }
+
+.stickers-container > * {
+    font-size: 2em;
+}

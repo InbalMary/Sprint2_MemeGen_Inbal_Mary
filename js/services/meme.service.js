@@ -79,12 +79,12 @@ function setFontSize(val) {
     gMeme.lines[gMeme.selectedLineIdx].size += val
 }
 
-function addLine() {
+function addLine(txt = 'New line added') {
     gMeme.lines.forEach(line => line.isSelected = false)
 
     const newLine =
     {
-        txt: 'New line added',
+        txt,
         size: 30,
         color: 'red',
         strokeColor: 'black',
