@@ -227,13 +227,13 @@ function onSwitchLine() {
     renderMeme()
 }
 
-function onCanvasClick(ev) {
-    console.log('ev', ev)
-    const { offsetX, offsetY } = ev
+function onCanvasClick(pos) {
+    console.log('pos', pos)
+    // const { offsetX, offsetY } = ev
 
     const idx = getMeme().lines.findIndex(line => {
-        return offsetX >= line.w && offsetX <= line.w + line.width
-            && offsetY >= line.h && offsetY <= line.h + line.height
+        return pos.x >= line.w && pos.x <= line.w + line.width
+            && pos.y >= line.h && pos.y <= line.h + line.height
     })
     console.log('idx', idx)
     if (idx !== -1) {
@@ -288,7 +288,7 @@ function onDown(ev) {
     // Get the ev pos from mouse or touch
     const pos = getEvPos(ev)
     console.log('pos', pos)
-    const idx = onCanvasClick(ev)
+    const idx = onCanvasClick(pos)
     if (idx === -1) return
 
     setLineDrag(idx, true)
