@@ -31,7 +31,7 @@ img {
 
 
 img {
-    width: 100%;
+    max-width: 100%;
     border-radius: 5px;
     opacity: 0.6;
     transition: opacity 0.4s;

@@ -72,11 +72,17 @@ input[type="color"] {
     fill: white;
 }
 
+.upload-btn,
 .btn-show-more,
 .flexible-btn {
     height: 50px;
     width: 100px;
     place-self: center;
+}
+
+.upload-btn{
+    width: 200px;
+    font-size: 0.75em;
 }
 
 .meme-item {

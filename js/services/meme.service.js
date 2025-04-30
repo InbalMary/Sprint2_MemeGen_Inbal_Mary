@@ -14,7 +14,7 @@ var gMeme = {
         {
             txt: 'Write your text here',
             size: 30,
-            color: 'red',
+            color: 'white',
             strokeColor: 'black',
             isSelected: true,
             font: 'Tahoma',
@@ -25,7 +25,7 @@ var gMeme = {
         {
             txt: 'I sometimes eat Falafel',
             size: 30,
-            color: 'red',
+            color: 'white',
             strokeColor: 'black',
             isSelected: false,
             font: 'Tahoma',
@@ -86,7 +86,7 @@ function addLine(txt = 'New line added') {
     {
         txt,
         size: 30,
-        color: 'red',
+        color: 'white',
         strokeColor: 'black',
         isSelected: true,
         font: 'Tahoma',
@@ -153,9 +153,9 @@ function setRandomGmem(picId) {
         selectedLineIdx: 0,
         lines: [
             {
-                txt:  makeFunnyLorem(),
+                txt: makeFunnyLorem(),
                 size: 30,
-                color: 'red',
+                color: 'white',
                 strokeColor: 'black',
                 isSelected: true,
                 font: 'Tahoma',
@@ -175,7 +175,7 @@ function setGmem(picId) {
             {
                 txt: 'Write your text here',
                 size: 30,
-                color: 'red',
+                color: 'white',
                 strokeColor: 'black',
                 isSelected: true,
                 font: 'Tahoma',
@@ -186,7 +186,7 @@ function setGmem(picId) {
             {
                 txt: 'I sometimes eat Falafel',
                 size: 30,
-                color: 'red',
+                color: 'white',
                 strokeColor: 'black',
                 isSelected: false,
                 font: 'Tahoma',
@@ -205,27 +205,36 @@ function saveCurMeme(preview) {
         const idx = gSavedMemes.findIndex(meme => meme.memeId === gSelectedSavedMemeId)
         if (idx !== -1) {
             gSavedMemes[idx].preview = preview
+            gSavedMemes[idx].memeData = _createMemeDataToSave()
         }
         gSelectedSavedMemeId = null
-    }else {
+    } else {
         var curMmeme = _createCurMemeToSave(preview, makeId())
         gSavedMemes.unshift(curMmeme)
     }
-    
-    
+
+
 
     saveToStorage(STORAGE_KEY, gSavedMemes)
     renderSavedMemes()
 }
 
 function _createCurMemeToSave(preview, memeId) {
-    const memeToSave = JSON.parse(JSON.stringify(getMeme()))
+    // const memeToSave = JSON.parse(JSON.stringify(getMeme()))
     return {
         memeId: memeId,
         preview: preview,
-        memeData: memeToSave,
+        memeData: _createMemeDataToSave(),
         timestamp: Date.now()
     }
+}
+
+function _createMemeDataToSave() {
+    const meme = JSON.parse(JSON.stringify(getMeme()))
+    if (gUploadedImg?.src) {
+        meme.uploadedImgUrl = gUploadedImg.src
+    }
+    return meme
 }
 
 function getSavedMemes() {
@@ -240,7 +249,7 @@ function saveMemes(updatedMemes) {
 
 function loadMemeForEditing(memeId) {
     console.log('getSavedMemes(), memeid', getSavedMemes(), memeId)
-    const memeToLoad =  getSavedMemes().find(meme => meme.memeId === memeId)
+    const memeToLoad = getSavedMemes().find(meme => meme.memeId === memeId)
     console.log('memeToLoad', memeToLoad)
     if (!memeToLoad) return null
     setGmemFromSaved(memeToLoad.memeData)
