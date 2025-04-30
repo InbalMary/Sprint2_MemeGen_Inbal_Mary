@@ -27,9 +27,14 @@ function onResize() {
     renderMeme()
 }
 
-function resizeCanvas() {
+function resizeCanvas(img = null) {
     const elContainer = document.querySelector('.canvas-container')
     gElCanvas.width = elContainer.clientWidth
+    if (img) {
+        gElCanvas.height = (img.naturalHeight / img.naturalWidth) * gElCanvas.width
+    } else {
+        gElCanvas.height = gElCanvas.width * 0.75
+    }
 }
 
 function onClearCanvas() {
@@ -77,6 +82,7 @@ function renderMeme() {
         img.src = curImg.url
     }
     img.onload = () => {
+        resizeCanvas(img)
         onClearCanvas()
         renderImg(img)
 
@@ -387,6 +393,7 @@ function renderSavedMemes() {
 function onMemeEdit(memeId) {
     gSelectedSavedMemeId = memeId
     loadMemeForEditing(memeId)
+    resizeCanvas()
     renderMeme()
     showEditor()
     document.querySelector('.txt-line').value = getCurLine().txt
