@@ -94,7 +94,7 @@ function renderMeme() {
                     var y
                     if (idx === 0) y = gElCanvas.height * 0.1
                     else if (idx === 1) y = gElCanvas.height * 0.9
-                    else y = gElCanvas.height * 0.35 + idx * ((line.size + 10))
+                    else y = gElCanvas.height * 0.35 + ((line.size + 10))
                     setPosition(line, idx, x, y)
                 }
                 drawText(line)
@@ -116,14 +116,6 @@ function renderImg(img) {
 
     gCtx.drawImage(img, 0, 0, gElCanvas.width, gElCanvas.height)
 }
-
-
-// function renderMeme(meme = getMeme()) {
-//     var txt = getCurTxt()
-
-//     console.log('meme', meme)
-//     onRenderMeme(gSelectedImg.id, txt)
-// }
 
 function onRenderRandomMeme() {
     gUploadedImg = null

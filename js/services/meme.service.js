@@ -99,13 +99,6 @@ function addLine(txt = 'New line added') {
     gMeme.selectedLineIdx = gMeme.lines.length - 1
 }
 
-function getNextLineY() {
-    const lineCount = gMeme.lines.length
-    const baseY = 50
-    const lineSpacing = 50
-    return baseY + lineCount * lineSpacing
-}
-
 function switchLine() {
     const lines = gMeme.lines
     const currIdx = gMeme.selectedLineIdx
@@ -252,12 +245,14 @@ function loadMemeForEditing(memeId) {
     const memeToLoad = getSavedMemes().find(meme => meme.memeId === memeId)
     console.log('memeToLoad', memeToLoad)
     if (!memeToLoad) return null
-    setGmemFromSaved(memeToLoad.memeData)
-    return memeToLoad.memeData
+    const memeCopy = JSON.parse(JSON.stringify(memeToLoad.memeData))
+    setGmemFromSaved(memeCopy)
+    return memeCopy
 }
 
 function setGmemFromSaved(meme) {
-    gMeme = meme
+    // gMeme = meme
+    gMeme = JSON.parse(JSON.stringify(meme))
 }
 
 function deleteMeme(memeId) {
