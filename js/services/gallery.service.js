@@ -20,7 +20,7 @@ function getPicById(picId) {
 }
 
 function _createPics() {
-    for (var i = 0; i < 25; i++) {
+    for (var i = 0; i < 28; i++) {
         gPics.push(_createPic(i))
     }
 }
@@ -58,4 +58,7 @@ function _addCategories() {
     gPics[22].categories = ['women', 'happy']
     gPics[23].categories = ['men', 'funny', 'smile']
     gPics[24].categories = ['men']
+    gPics[25].categories = ['cartoon', 'funny']
+    gPics[26].categories = ['cartoon', 'funny']
+    gPics[27].categories = ['cartoon', 'funny']
 }

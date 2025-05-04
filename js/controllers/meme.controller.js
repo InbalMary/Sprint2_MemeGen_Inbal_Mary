@@ -144,43 +144,65 @@ function drawText(line) {
     const y = pos.y
 
     gCtx.lineWidth = size / 25
-    gCtx.strokeStyle = strokeColor
+    
     gCtx.fillStyle = color
     gCtx.font = `bold ${size}px ${font}`
     // gCtx.textAlign = 'center'
-    gCtx.textBaseline = 'middle'
+    // gCtx.textBaseline = 'middle'
 
     const metrics = gCtx.measureText(txt)
-    const padding = 10
-    const width = metrics.width + padding
-    const height = size + padding
+    const actualHeight = size
 
-    let w, h
+    const padding = 10
+    const width = metrics.width + padding * 2
+    const height = actualHeight + padding * 2
+
+    let w, textX
+    const canvasWidth = gElCanvas.width
     if (align === 'right') {
-        w = x - width
-        if (w < 0) w = 2
+        w = Math.max(2, x - width + padding)
+        if (w + width > canvasWidth) w = canvasWidth - width - 2
+        textX = w + width - padding
+        gCtx.textAlign = 'right'
     } else if (align === 'center') {
         w = x - width / 2
         if (w < 0) w = 2
+        else if (w + width > canvasWidth) w = canvasWidth - width - 2
+        textX = w + width / 2
+        gCtx.textAlign = 'center'
     } else {
-        w = x
-        if (w + width > gElCanvas.width) w = gElCanvas.width - width - 2
+        w = x - padding
+        if (w < 0) w = 2
+        else if (w + width > canvasWidth) w = canvasWidth - width - 2
+        textX = w + padding
+        gCtx.textAlign = 'left'
     }
 
-    h = y - height / 2;
+    const h = y - height / 2;
+    const canvasHeight = gElCanvas.height
+    let adjustedH = h
 
-    gCtx.fillText(txt, w, y)
-    gCtx.strokeText(txt, w, y)
-
-    line.w = w
-    line.h = h
-    line.width = width
-    line.height = height
+    if (h < 2) {
+        adjustedH = 2
+    } else if (h + height > canvasHeight) {
+        adjustedH = canvasHeight - height - 2
+    }
 
     if (isSelected) {
         gCtx.strokeStyle = 'black'
-        gCtx.strokeRect(w, h, width, height)
+        gCtx.strokeRect(w, adjustedH, width, height)
     }
+    gCtx.textBaseline = 'middle'
+    const textY = adjustedH + height / 2
+
+    gCtx.fillText(txt, textX, textY)
+    gCtx.strokeStyle = strokeColor
+    gCtx.strokeText(txt, textX, textY)
+
+    line.w = w
+    line.h = adjustedH
+    line.width = width
+    line.height = height
 }
 
 function onSetLineTxt(elInput) {
@@ -486,7 +508,9 @@ async function uploadImg(imgData, onSuccess) {
 
 // The next 2 functions handle IMAGE UPLOADING to img tag from file system: 
 function onImgInput(ev) {
-    loadImageFromInput(ev, renderImg)
+    gSelectedSavedMemeId = null 
+    gUploadedImg = null
+    loadImageFromInput(ev, onImageReady)
 }
 
 function loadImageFromInput(ev, onImageReady) {
@@ -500,6 +524,17 @@ function loadImageFromInput(ev, onImageReady) {
         img.src = event.target.result
     }
     reader.readAsDataURL(ev.target.files[0])
+}
+
+function onImageReady(img) {
+    gUploadedImg = img
+    setGmem(null)
+
+    gElCanvas.height = (img.naturalHeight / img.naturalWidth) * gElCanvas.width
+    gCtx.drawImage(img, 0, 0, gElCanvas.width, gElCanvas.height)
+
+    showEditor()
+    renderMeme()
 }
 
 function renderImg(img) {
