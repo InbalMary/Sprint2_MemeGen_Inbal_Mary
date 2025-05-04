@@ -63,6 +63,9 @@ function onImgSelect(picId) {
 
     elGallery.classList.add('hide')
     elEditor.classList.remove('hide')
+
+    document.querySelector('.about-container').classList.add('hide')
+
     document.querySelector('.txt-line').value = getCurLine().txt
     onClearCanvas()
     setselectedImgId(picId)
@@ -384,6 +387,7 @@ function onSavedMemesGallery() {
     renderSavedMemes()
     document.querySelector('.gallery-container').classList.add('hide')
     document.querySelector('.meme-editor').classList.add('hide')
+    document.querySelector('.about-container').classList.add('hide')
     document.querySelector('.saved-memes-container').classList.remove('hide')
 
     if (window.innerWidth <= 640) {
@@ -400,6 +404,7 @@ function showEditor() {
     document.querySelector('.meme-editor').classList.remove('hide')
     document.querySelector('.gallery-container').classList.add('hide')
     document.querySelector('.saved-memes-container').classList.add('hide')
+    document.querySelector('.about-container').classList.add('hide')
 }
 
 function renderSavedMemes() {
@@ -650,4 +655,15 @@ function initTextEditing() {
     if (gIsMobile) return
     createTextInput()
     addDoubleClickListener()
+}
+
+function onAbout() {
+    document.querySelector('.gallery-container').classList.add('hide')
+    document.querySelector('.about-container').classList.remove('hide')
+    document.querySelector('.meme-editor').classList.add('hide')
+    document.querySelector('.saved-memes-container').classList.add('hide')
+
+    if (window.innerWidth <= 640) {
+        document.body.classList.remove('menu-open');
+    }
 }

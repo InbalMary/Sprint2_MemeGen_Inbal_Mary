@@ -23,7 +23,7 @@ function renderGallery() {
 function onToggleCategoriesView() {
     gShowAllKeywords = !gShowAllKeywords
     renderCategories()
-    document.querySelector('.btn-show-more').innerText = gShowAllKeywords ? 'less...' : 'more...'
+    document.querySelector('.btn-show-more').innerText = gShowAllKeywords ? '...less' : 'more...'
 }
 
 
