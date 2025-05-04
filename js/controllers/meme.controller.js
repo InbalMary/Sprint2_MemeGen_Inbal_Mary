@@ -12,6 +12,11 @@ const gStickers = ['😎', '😂', '🔥', '😍', '🥦', '🚩', '🐶', '🌈
 let gStickerStartIdx = 0
 const STICKERS_TO_SHOW = 4
 
+let gEditingText = false
+let gTextInput = null
+let gEditingLineIdx = -1
+const gIsMobile = /Mobi|Android/i.test(navigator.userAgent)
+
 function onInit() {
     gElCanvas = document.querySelector('canvas')
     gCtx = gElCanvas.getContext('2d')
@@ -20,6 +25,8 @@ function onInit() {
     renderGallery()
     // renderRandomMeme()
     onResize()
+    console.log('gIsMobile', gIsMobile)
+    if (!gIsMobile) initTextEditing()
 }
 
 function onResize() {
@@ -69,7 +76,7 @@ function renderMeme() {
 
     if (curMeme.uploadedImgUrl) {
         img.src = curMeme.uploadedImgUrl
-    }else if (gUploadedImg) {
+    } else if (gUploadedImg) {
         img.src = gUploadedImg.src
     } else {
         const curImg = getPicById(+curMeme.selectedImgId)
@@ -97,7 +104,8 @@ function renderMeme() {
                     else y = gElCanvas.height * 0.35 + ((line.size + 10))
                     setPosition(line, idx, x, y)
                 }
-                drawText(line)
+                if (!gIsMobile && gEditingLineIdx != idx) drawText(line)
+                if (gIsMobile) drawText(line)
                 // console.log('line.box', line.box)
             }
         })
@@ -223,6 +231,11 @@ function onCanvasClick(pos) {
     console.log('pos', pos)
     // const { offsetX, offsetY } = ev
 
+    if (!gIsMobile && gEditingText) {
+        finishEditing()
+        return -1
+    }
+
     const idx = getMeme().lines.findIndex(line => {
         return pos.x >= line.w && pos.x <= line.w + line.width
             && pos.y >= line.h && pos.y <= line.h + line.height
@@ -231,6 +244,7 @@ function onCanvasClick(pos) {
     if (idx !== -1) {
         selectLine(idx)
         updateInput()
+        if (!gIsMobile) startEditing(idx)
     }
     return idx
 }
@@ -240,6 +254,9 @@ function selectLine(idx) {
     gMeme.lines[idx].isSelected = true
     gMeme.selectedLineIdx = idx
     renderMeme()
+    if (!gIsMobile && gEditingText) {
+        finishEditing()
+    }
 }
 
 function updateInput() {
@@ -490,4 +507,112 @@ function renderImg(img) {
     gCtx.drawImage(img, 0, 0, gElCanvas.width, gElCanvas.height)
 
     gUploadedImg = img
+}
+
+function createTextInput() {
+    if (!gTextInput) {
+        gTextInput = document.createElement('textarea')
+        gTextInput.className = 'hide'
+        gTextInput.style.position = 'absolute'
+        gTextInput.style.background = 'transparent'
+        gTextInput.style.border = '1px dashed black'
+        gTextInput.style.outline = 'none'
+        gTextInput.style.overflow = 'hidden'
+        gTextInput.style.resize = 'none'
+        gTextInput.style.zIndex = '10'
+        gTextInput.style.fontFamily = 'Tahoma'
+        gTextInput.style.fontWeight = 'bold'
+        gTextInput.dir = 'auto'
+
+        document.body.appendChild(gTextInput)
+
+        gTextInput.addEventListener('blur', finishEditing)
+
+        gTextInput.addEventListener('input', () => {
+            adjustTextareaSize()
+        })
+    }
+    return gTextInput
+}
+
+function adjustTextareaSize() {
+    if (!gTextInput) return
+
+    const line = getMeme().lines[getMeme().selectedLineIdx]
+    if (!line) return
+
+    gTextInput.style.height = 'auto'
+}
+
+function startEditing(lineIdx) {
+    if (gIsMobile) return
+    const line = getMeme().lines[lineIdx]
+    if (!line) return
+
+    gEditingText = true
+    gEditingLineIdx = lineIdx
+
+    const textarea = createTextInput()
+    textarea.value = line.txt
+
+    const canvasRect = gElCanvas.getBoundingClientRect()
+    textarea.style.left = `${canvasRect.left + line.w}px`
+    textarea.style.top = `${canvasRect.top + line.h}px`
+    textarea.style.color = line.color
+    textarea.style.fontSize = `${line.size}px`
+    textarea.style.fontFamily = line.font
+    textarea.style.textAlign = line.align
+    textarea.style.width = `${line.width}px`
+    textarea.style.height = `${line.height}px`
+
+    textarea.style.display = 'block'
+    textarea.focus()
+    textarea.select()
+    renderMeme()
+}
+
+function finishEditing() {
+    if (!gEditingText || !gTextInput) return
+
+    const meme = getMeme()
+    if (gEditingLineIdx !== -1 && meme.lines[gEditingLineIdx]) {
+        meme.lines[gEditingLineIdx].txt = gTextInput.value
+    }
+
+    gTextInput.style.display = 'none'
+    gEditingText = false
+    gEditingLineIdx = -1
+    renderMeme()
+}
+
+function onCanvasDblClick(pos) {
+    if (gIsMobile) return
+    const idx = getMeme().lines.findIndex(line => {
+        return pos.x >= line.w && pos.x <= line.w + line.width
+            && pos.y >= line.h && pos.y <= line.h + line.height
+    })
+
+    if (idx !== -1) {
+        selectLine(idx)
+        if (!gIsMobile) startEditing(idx)
+        return idx
+    }
+    return -1
+}
+
+function addDoubleClickListener() {
+
+
+    gElCanvas.addEventListener('dblclick', (ev) => {
+        const pos = getEvPos(ev)
+        onCanvasDblClick(pos)
+    })
+}
+
+
+function initTextEditing() {
+
+    if (gIsMobile) return
+    createTextInput()
+    addDoubleClickListener()
 }
