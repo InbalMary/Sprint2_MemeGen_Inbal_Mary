@@ -121,17 +121,3 @@ input[type="color"] {
 .stickers-container > * {
     font-size: 2em;
 }
-
-.about-container {
-    display: grid;
-    grid-template-columns: 1fr;
-    max-width: 680px;
-    gap: 1em;
-}
-
-.about-container img {
-    width: 70%;
-    place-self: center;
-    opacity: 1;
-    cursor: default;
-}

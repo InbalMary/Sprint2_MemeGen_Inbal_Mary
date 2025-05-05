@@ -8,12 +8,11 @@
 
 /* COMPONENTS */
 @import url('./components/header.css');
-/* @import url('./components/logo.css'); */
 @import url('./components/main-nav.css');
 @import url('./components/footer.css');
 @import url('./components/buttons.css');
-/* @import url('style/components/burger.css'); */
 @import url('./components/main-screen.css');
+@import url('./components/about.css');
 
 /* mq */
 @import url('./style/setup/mq.css');

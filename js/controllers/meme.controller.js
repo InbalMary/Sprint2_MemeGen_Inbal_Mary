@@ -66,6 +66,8 @@ function onImgSelect(picId) {
 
     document.querySelector('.about-container').classList.add('hide')
 
+    document.getElementById('sRotation-angle').innerText = getCurLine().rotation
+    document.getElementById('rotation-angle').value = getCurLine().rotation || 0
     document.querySelector('.txt-line').value = getCurLine().txt
     onClearCanvas()
     setselectedImgId(picId)
@@ -142,13 +144,14 @@ function onRenderRandomMeme() {
 }
 
 function drawText(line) {
-    const { txt, pos, color, strokeColor, size, isSelected, font, align } = line
+    const { txt, pos, color, strokeColor, size, isSelected, font, align, rotation = 0 } = line
     const x = pos.x
     const y = pos.y
 
     gCtx.lineWidth = size / 25
     
-    gCtx.fillStyle = color
+    gCtx.save()
+    
     gCtx.font = `bold ${size}px ${font}`
     // gCtx.textAlign = 'center'
     // gCtx.textBaseline = 'middle'
@@ -181,7 +184,7 @@ function drawText(line) {
         gCtx.textAlign = 'left'
     }
 
-    const h = y - height / 2;
+    const h = y - height / 2
     const canvasHeight = gElCanvas.height
     let adjustedH = h
 
@@ -191,10 +194,19 @@ function drawText(line) {
         adjustedH = canvasHeight - height - 2
     }
 
+    const centerX = w + width / 2
+    const centerY = adjustedH + height / 2
+
+    gCtx.translate(centerX, centerY)
+    gCtx.rotate(rotation * Math.PI / 180)
+    gCtx.translate(-centerX, -centerY)
+
     if (isSelected) {
         gCtx.strokeStyle = 'black'
         gCtx.strokeRect(w, adjustedH, width, height)
     }
+
+    gCtx.fillStyle = color
     gCtx.textBaseline = 'middle'
     const textY = adjustedH + height / 2
 
@@ -202,10 +214,13 @@ function drawText(line) {
     gCtx.strokeStyle = strokeColor
     gCtx.strokeText(txt, textX, textY)
 
+    gCtx.restore()
+
     line.w = w
     line.h = adjustedH
     line.width = width
     line.height = height
+    line.rotation = rotation || 0
 }
 
 function onSetLineTxt(elInput) {
@@ -287,6 +302,9 @@ function selectLine(idx) {
 function updateInput() {
     const elInput = document.querySelector('.txt-line')
     const elSelect = document.getElementById('font-select')
+    const elSpan = document.getElementById('sRotation-angle')
+    const elRotationSlider = document.getElementById('rotation-angle')
+        
     const line = getCurLine()
     if (!line) return
     console.log('line', line, line.txt)
@@ -298,6 +316,14 @@ function updateInput() {
 
     if (elSelect) {
         elSelect.value = line.font || ''
+    }
+
+    if(elSpan) {
+        elSpan.innerText = line.rotation
+    }
+
+    if(elRotationSlider) {
+        elRotationSlider.value = line.rotation || 0
     }
 }
 
@@ -433,6 +459,8 @@ function onMemeEdit(memeId) {
     renderMeme()
     showEditor()
     document.querySelector('.txt-line').value = getCurLine().txt
+    document.getElementById('sRotation-angle').innerText = getCurLine().rotation
+    document.getElementById('rotation-angle').value = getCurLine().rotation || 0
 }
 
 function onMemeDelete(ev, memeId) {
@@ -666,4 +694,15 @@ function onAbout() {
     if (window.innerWidth <= 640) {
         document.body.classList.remove('menu-open');
     }
+}
+
+function onShowRotateDegree(newAngleVal){
+    document.getElementById('sRotation-angle').innerText = newAngleVal
+    document.getElementById('rotation-angle').value = getCurLine().rotation || 0
+    const selectedLineIdx = getCurLineIdx()
+
+    if (isNaN(newAngleVal) || selectedLineIdx === -1) return
+    const line = gMeme.lines[selectedLineIdx]
+    line.rotation = newAngleVal
+    renderMeme()
 }

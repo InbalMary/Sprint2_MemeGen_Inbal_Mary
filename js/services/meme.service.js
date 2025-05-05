@@ -20,7 +20,8 @@ var gMeme = {
             font: 'Tahoma',
             align: 'center',
             isDeleted: false,
-            isDrag: false
+            isDrag: false,
+            rotation: 0
         },
         {
             txt: 'I sometimes eat Falafel',
@@ -31,7 +32,8 @@ var gMeme = {
             font: 'Tahoma',
             align: 'center',
             isDeleted: false,
-            isDrag: false
+            isDrag: false,
+            rotation: 0
         }
     ]
 }
@@ -92,7 +94,8 @@ function addLine(txt = 'New line added') {
         font: 'Tahoma',
         align: 'center',
         isDeleted: false,
-        isDrag: false
+        isDrag: false,
+        rotation: 0
     }
 
     gMeme.lines.push(newLine)
@@ -154,7 +157,8 @@ function setRandomGmem(picId) {
                 font: 'Tahoma',
                 align: 'center',
                 isDeleted: false,
-                isDrag: false
+                isDrag: false,
+                rotation: 0
             }
         ]
     }
@@ -174,7 +178,8 @@ function setGmem(picId) {
                 font: 'Tahoma',
                 align: 'center',
                 isDeleted: false,
-                isDrag: false
+                isDrag: false,
+                rotation: 0
             },
             {
                 txt: 'I sometimes eat Falafel',
@@ -185,7 +190,8 @@ function setGmem(picId) {
                 font: 'Tahoma',
                 align: 'center',
                 isDeleted: false,
-                isDrag: false
+                isDrag: false,
+                rotation: 0
             }
         ]
     }
