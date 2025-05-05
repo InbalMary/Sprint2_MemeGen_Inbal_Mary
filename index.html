@@ -82,16 +82,9 @@
                 </datalist>
                 <div class="categories-container"></div>
                 <button class="btn-show-more" onclick="onToggleCategoriesView()">more...</button>
-
-                <!-- <input type="text" id="search-input" placeholder="Search..." oninput="onFilterChange()"> -->
             </div>
-
-
-
             <div class="gallery-images">
-
             </div>
-
         </section>
 
         <section class="meme-editor hide">
@@ -156,7 +149,7 @@
                                 </path>
                             </g>
                         </svg></label>
-                    <input type="range" id="rotation-angle" name="rotation-angle" min="-180" max="180" value="0"
+                    <input type="range" id="rotation-angle" name="rotation-angle" min="0" max="360" value="0"
                         oninput="onShowRotateDegree(this.value)" /> <span id="sRotation-angle"> 0</span>
                 </div>
                 <div class="lines-edit flex justify-center align-center">
@@ -172,7 +165,6 @@
                                 </path>
                             </g>
                         </svg> </button>
-
                     <button title="decrease text" onclick="onChangeTxtSize('-')">
                         <svg width="40px" height="40px" viewBox="0 0 76 76" xmlns="http://www.w3.org/2000/svg"
                             xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" baseProfile="full"
@@ -185,7 +177,6 @@
                                 </path>
                             </g>
                         </svg> </button>
-
                     <button title="align left" onclick="onSetAlign('right')"><svg width="40px" height="40px"
                             viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
@@ -213,7 +204,6 @@
                                     stroke-linecap="round" stroke-linejoin="round"></path>
                             </g>
                         </svg></button>
-
                 </div>
                 <div class="lines-edit flex justify-center align-center">
                     <select id="font-select" onchange="onSelectFont(this.value)">
@@ -278,14 +268,11 @@
                     <input type="color" id="stroke-color" name="stroke-color" value="#000000"
                         onchange="onSetStrokeColor(this.value)" />
                 </div>
-
                 <div class="sticker-gallery flex justify-center align-center">
                     <button onclick="onPrevStickers()">←</button>
                     <div class="stickers-container flex justify-center align-center"></div>
                     <button onclick="onNextStickers()">→</button>
                 </div>
-
-
                 <div class="lines-edit flex justify-center align-center">
                     <div class="save btn" title="save" onclick="onSaveMeme()"><svg fill="#000000" width="40px"
                             height="40px" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
@@ -324,7 +311,6 @@
                                     </g>
                                 </g>
                             </svg></a></div>
-
                     <form method="POST" enctype="multipart/form-data" onsubmit="onShareImg(event)">
                         <button class="facebook btn" type="submit" title="share on facebook"><svg fill="#000000"
                                 width="100%" height="100%" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
@@ -349,30 +335,28 @@
                                 <line x1="12" y1="3" x2="12" y2="15" />
                             </svg>
                         </label>
-
                     </div>
                 </div>
-
             </div>
         </section>
 
         <section class="saved-memes-container hide">No-saved-memes</section>
 
-        <section class="about-container hide ">
-            <h2>About Meme Generator</h2>
-            <p>Our Meme Generator is a lightweight, user-friendly meme editor designed for creating and customizing
-                memes quickly and
-                intuitively on both desktop and mobile!</p>
-
-            <p> Built with flexibility in mind, Meme Generator allows you to add and edit text directly on images,
-                adjust fonts,
-                colors, alignment, and positioning — all in a seamless interface. Whether you're crafting a meme for
-                social media, a presentation, or just for fun, Meme Generator makes the process fast, responsive, and
-                enjoyable.</p>
-
-            <p>With support for saving, re-editing, facebook sharing and managing your meme creations, Meme Generator is
-                your creative companion
-                for visual expression!</p>
+        <section class="about-container flex hide ">
+            <div class="about">
+                <h2>About Meme Generator</h2>
+                <p>Our Meme Generator is a lightweight, user-friendly meme editor designed for creating and customizing
+                    memes quickly and
+                    intuitively on both desktop and mobile!</p>   
+                <p> Built with flexibility in mind, Meme Generator allows you to add and edit text directly on images,
+                    adjust fonts,
+                    colors, alignment, and positioning — all in a seamless interface. Whether you're crafting a meme for
+                    social media, a presentation, or just for fun, Meme Generator makes the process fast, responsive, and
+                    enjoyable.</p>   
+                <p>With support for saving, re-editing, facebook sharing and managing your meme creations, Meme Generator is
+                    your creative companion
+                    for visual expression!</p>
+            </div>          
             <img src="imgs/about.jpg" alt="about image">
         </section>
     </main>

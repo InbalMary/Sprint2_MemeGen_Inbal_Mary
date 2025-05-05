@@ -46,12 +46,12 @@
         filter: blur(2px);
         pointer-events: none;
     }
-    
+
     body.menu-open .saved-memes-container img,
     body.menu-open .gallery-container img {
         pointer-events: none;
-        transform: none ;
-        transition: none ;
+        transform: none;
+        transition: none;
     }
 
     body.menu-open .filter-controls {
@@ -60,27 +60,54 @@
         filter: none;
     }
 
-    .main-nav .main-nav-list {
-        gap: 0px;
+    .filter-controls {
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+        gap: 10px;
+    }
+
+    #search-input {
+        grid-column: 1 / -1;
+        justify-self: center;
+        width: auto;
+    }
+
+    .btn-show-more {
+        justify-self: start;
+    }
+
+    .about-container img {
+        width: 60%;
     }
 }
 
 @media screen and (width > 640px) {
     .main-layout {
         grid-template-columns:
-        minmax(16px, 1fr) minmax(1fr, 1060px) minmax(16px, 1fr);
+            minmax(16px, 1fr) minmax(1fr, 1060px) minmax(16px, 1fr);
     }
 
     .meme-editor {
         grid-template-columns: minmax(auto, 400px) minmax(auto, 400px);
     }
 
-    
     .canvas-container {
         width: 50vw;
     }
-    
+
     .btn-toggle-menu {
         display: none;
+    }
+
+    .main-nav-list a {
+        border-right: 1px solid var(--clr-primary--1);
+    }
+
+    .main-nav-list:first-child {
+        border-left: 1px solid var(--clr-primary--1);
+    }
+
+    .about-container {
+        grid-template-columns: 2fr 1fr;
     }
 }

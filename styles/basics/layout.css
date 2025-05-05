@@ -27,7 +27,7 @@
 
 .saved-memes-container {
     width: 100%;
-    grid-template-columns: repeat(auto-fit, 200px);
+    /* grid-template-columns: repeat(auto-fit, 200px); */
     place-self: start start;
 }
 

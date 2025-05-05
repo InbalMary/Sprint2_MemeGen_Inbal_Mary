@@ -52,6 +52,10 @@ function getCurLine() {
     return gMeme.lines[gMeme.selectedLineIdx]
 }
 
+function setCurLineIdx(idx) {
+    gMeme.selectedLineIdx = idx
+}
+
 function getCurLineIdx() {
     return gMeme.selectedLineIdx
 }

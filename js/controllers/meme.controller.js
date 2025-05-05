@@ -23,7 +23,6 @@ function onInit() {
 
     loadCategories()
     renderGallery()
-    // renderRandomMeme()
     onResize()
     console.log('gIsMobile', gIsMobile)
     if (!gIsMobile) initTextEditing()
@@ -109,9 +108,9 @@ function renderMeme() {
                     else y = gElCanvas.height * 0.35 + ((line.size + 10))
                     setPosition(line, idx, x, y)
                 }
+                line.isSelected = (idx === getCurLineIdx() && getCurLineIdx() !== -1)
                 if (!gIsMobile && gEditingLineIdx != idx) drawText(line)
                 if (gIsMobile) drawText(line)
-                // console.log('line.box', line.box)
             }
         })
     }
@@ -149,9 +148,9 @@ function drawText(line) {
     const y = pos.y
 
     gCtx.lineWidth = size / 25
-    
+
     gCtx.save()
-    
+
     gCtx.font = `bold ${size}px ${font}`
     // gCtx.textAlign = 'center'
     // gCtx.textBaseline = 'middle'
@@ -285,6 +284,10 @@ function onCanvasClick(pos) {
         selectLine(idx)
         updateInput()
         if (!gIsMobile) startEditing(idx)
+    } else {
+        setCurLineIdx(-1)
+        console.log('idx', idx)
+        renderMeme()
     }
     return idx
 }
@@ -304,7 +307,7 @@ function updateInput() {
     const elSelect = document.getElementById('font-select')
     const elSpan = document.getElementById('sRotation-angle')
     const elRotationSlider = document.getElementById('rotation-angle')
-        
+
     const line = getCurLine()
     if (!line) return
     console.log('line', line, line.txt)
@@ -318,11 +321,11 @@ function updateInput() {
         elSelect.value = line.font || ''
     }
 
-    if(elSpan) {
+    if (elSpan) {
         elSpan.innerText = line.rotation
     }
 
-    if(elRotationSlider) {
+    if (elRotationSlider) {
         elRotationSlider.value = line.rotation || 0
     }
 }
@@ -354,7 +357,7 @@ function onDown(ev) {
     setLineDrag(idx, true)
     //Save the pos we start from
     gStartPos = pos
-    document.body.style.cursor = 'grabbing'
+    gElCanvas.style.cursor = 'grabbing'
 }
 
 function onMove(ev) {
@@ -383,7 +386,7 @@ function onUp() {
     if (draggedLineIdx !== -1) {
         setLineDrag(draggedLineIdx, false)
     }
-    document.body.style.cursor = 'grab'
+    gElCanvas.style.cursor = 'grab'
 }
 
 function getEvPos(ev) {
@@ -458,9 +461,16 @@ function onMemeEdit(memeId) {
     resizeCanvas()
     renderMeme()
     showEditor()
-    document.querySelector('.txt-line').value = getCurLine().txt
-    document.getElementById('sRotation-angle').innerText = getCurLine().rotation
-    document.getElementById('rotation-angle').value = getCurLine().rotation || 0
+    const curLine = getCurLine()
+    if (curLine) {
+        document.querySelector('.txt-line').value = curLine.txt
+        document.getElementById('sRotation-angle').innerText = curLine.rotation
+        document.getElementById('rotation-angle').value = curLine.rotation || 0
+    } else {
+        document.querySelector('.txt-line').value = ''
+        document.getElementById('sRotation-angle').innerText = '0'
+        document.getElementById('rotation-angle').value = 0
+    }
 }
 
 function onMemeDelete(ev, memeId) {
@@ -471,7 +481,6 @@ function onMemeDelete(ev, memeId) {
 }
 
 // Stickers
-
 function renderStickers() {
     const elContainer = document.querySelector('.stickers-container')
     const stickersToShow = gStickers.slice(gStickerStartIdx, gStickerStartIdx + STICKERS_TO_SHOW)
@@ -541,7 +550,7 @@ async function uploadImg(imgData, onSuccess) {
 
 // The next 2 functions handle IMAGE UPLOADING to img tag from file system: 
 function onImgInput(ev) {
-    gSelectedSavedMemeId = null 
+    gSelectedSavedMemeId = null
     gUploadedImg = null
     loadImageFromInput(ev, onImageReady)
 }
@@ -676,7 +685,6 @@ function addDoubleClickListener() {
 }
 
 function initTextEditing() {
-
     if (gIsMobile) return
     createTextInput()
     addDoubleClickListener()
@@ -693,7 +701,7 @@ function onAbout() {
     }
 }
 
-function onShowRotateDegree(newAngleVal){
+function onShowRotateDegree(newAngleVal) {
     document.getElementById('sRotation-angle').innerText = newAngleVal
     document.getElementById('rotation-angle').value = getCurLine().rotation || 0
     const selectedLineIdx = getCurLineIdx()

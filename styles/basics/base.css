@@ -22,6 +22,7 @@ canvas {
     width: 100%;
     height: auto;
     display: block;
+    cursor: grab;
 }
 
 img {
@@ -49,4 +50,9 @@ h5,
 h6,
 p {
     margin: 0 0 1em;
+}
+
+input, button, textarea, select {
+    max-width: 100%;
+    font: inherit;
 }
