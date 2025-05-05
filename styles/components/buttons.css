@@ -72,6 +72,11 @@ input[type="color"] {
     fill: white;
 }
 
+.delete-btn:hover,
+.delete-btn:hover svg {
+    background-color: red;
+}
+
 .upload-btn,
 .btn-show-more,
 .flexible-btn {

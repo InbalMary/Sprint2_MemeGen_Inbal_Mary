@@ -14,3 +14,8 @@ body.menu-open .main-screen {
     opacity: 1;
     pointer-events: auto;
 }
+
+body.menu-open .lines-edit > * {
+    z-index: -1;
+    pointer-events: none;
+}

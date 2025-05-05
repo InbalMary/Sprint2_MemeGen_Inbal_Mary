@@ -669,14 +669,11 @@ function onCanvasDblClick(pos) {
 }
 
 function addDoubleClickListener() {
-
-
     gElCanvas.addEventListener('dblclick', (ev) => {
         const pos = getEvPos(ev)
         onCanvasDblClick(pos)
     })
 }
-
 
 function initTextEditing() {
 

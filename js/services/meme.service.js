@@ -37,6 +37,7 @@ var gMeme = {
         }
     ]
 }
+
 var gKeywordSearchCountMap = { 'funny': 12, 'cat': 16, 'baby': 2 }
 
 function getMeme() {
@@ -198,7 +199,6 @@ function setGmem(picId) {
 }
 
 // Saved Memes
-
 function saveCurMeme(preview) {
     if (gSelectedSavedMemeId) {
         const idx = gSavedMemes.findIndex(meme => meme.memeId === gSelectedSavedMemeId)
@@ -211,9 +211,6 @@ function saveCurMeme(preview) {
         var curMmeme = _createCurMemeToSave(preview, makeId())
         gSavedMemes.unshift(curMmeme)
     }
-
-
-
     saveToStorage(STORAGE_KEY, gSavedMemes)
     renderSavedMemes()
 }
