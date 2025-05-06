@@ -98,8 +98,6 @@ function renderMeme() {
         renderImg(img)
 
         curMeme.lines.forEach((line, idx) => {
-            if (!line.isDeleted) {
-
                 if (!line.pos || !line.pos.x || !line.pos.y) {
                     const x = gElCanvas.width / 2
                     var y
@@ -111,7 +109,6 @@ function renderMeme() {
                 line.isSelected = (idx === getCurLineIdx() && getCurLineIdx() !== -1)
                 if (!gIsMobile && gEditingLineIdx != idx) drawText(line)
                 if (gIsMobile) drawText(line)
-            }
         })
     }
     // console.log('meme', curMeme)

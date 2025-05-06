@@ -19,7 +19,6 @@ var gMeme = {
             isSelected: true,
             font: 'Tahoma',
             align: 'center',
-            isDeleted: false,
             isDrag: false,
             rotation: 0
         },
@@ -31,7 +30,6 @@ var gMeme = {
             isSelected: false,
             font: 'Tahoma',
             align: 'center',
-            isDeleted: false,
             isDrag: false,
             rotation: 0
         }
@@ -98,7 +96,6 @@ function addLine(txt = 'New line added') {
         isSelected: true,
         font: 'Tahoma',
         align: 'center',
-        isDeleted: false,
         isDrag: false,
         rotation: 0
     }
@@ -132,8 +129,13 @@ function setAlign(align) {
 }
 
 function deleteLine() {
-    const line = gMeme.lines[gMeme.selectedLineIdx]
-    if (line) line.isDeleted = true;
+    if (gMeme.selectedLineIdx < 0 || gMeme.selectedLineIdx >= gMeme.lines.length) {
+        console.log('No valid line selected for deletion')
+        return
+    }
+    gMeme.lines.splice(gMeme.selectedLineIdx, 1)
+    if (gMeme.lines.length === 0) gMeme.selectedLineIdx = -1
+    else if (gMeme.selectedLineIdx >= gMeme.lines.length) gMeme.selectedLineIdx = gMeme.lines.length - 1
 }
 
 function setLineDrag(idx, isDrag) {
@@ -161,7 +163,6 @@ function setRandomGmem(picId) {
                 isSelected: true,
                 font: 'Tahoma',
                 align: 'center',
-                isDeleted: false,
                 isDrag: false,
                 rotation: 0
             }
@@ -182,7 +183,6 @@ function setGmem(picId) {
                 isSelected: true,
                 font: 'Tahoma',
                 align: 'center',
-                isDeleted: false,
                 isDrag: false,
                 rotation: 0
             },
@@ -194,7 +194,6 @@ function setGmem(picId) {
                 isSelected: false,
                 font: 'Tahoma',
                 align: 'center',
-                isDeleted: false,
                 isDrag: false,
                 rotation: 0
             }
