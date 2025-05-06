@@ -1,7 +1,5 @@
 'use strict'
 
-var gImgs = [{ id: 1, url: 'imgs/1.jpg', keywords: ['funny', 'cat'] }]
-
 const STORAGE_KEY = 'savedMemesDB'
 
 var gSavedMemes = loadFromStorage(STORAGE_KEY) || []

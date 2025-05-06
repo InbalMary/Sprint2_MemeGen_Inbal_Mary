@@ -1,6 +1,6 @@
 'use strict'
 
-var gCategories = { 'women': 2, 'men': 0, 'baby': 0, 'smile': 3, 'happy': 0, 'funny': 0, 'love': 5, 'dog': 0, 'cat': 0, 'cartoon': 0 }
+var gCategories = { 'women': 2, 'men': 0, 'baby': 0, 'smile': 3, 'happy': 0, 'funny': 0, 'love': 5, 'dog': 0, 'cat': 0, 'cartoon': 0, 'sad': 0 }
 const CATEGORIES_STORAGE_KEY = 'popularCategoriesDB'
 let gShowAllKeywords = false
 

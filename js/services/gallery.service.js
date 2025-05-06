@@ -20,7 +20,7 @@ function getPicById(picId) {
 }
 
 function _createPics() {
-    for (var i = 0; i < 28; i++) {
+    for (var i = 0; i < 44; i++) {
         gPics.push(_createPic(i))
     }
 }
@@ -33,14 +33,14 @@ function _createPic(idx) {
 }
 
 function _addCategories() {
-    gPics[0].categories = ['women', 'smile', 'happy']
-    gPics[1].categories = ['men', 'funny']
-    gPics[2].categories = ['dog', 'love', 'smile']
-    gPics[3].categories = ['baby', 'funny', 'smile']
+    gPics[0].categories = ['cartoon', 'funny']
+    gPics[1].categories = ['men', 'funny', 'smile']
+    gPics[2].categories = ['men', 'smile', 'funny']
+    gPics[3].categories = ['baby', 'funny']
     gPics[4].categories = ['cartoon', 'funny']
     gPics[5].categories = ['dog', 'baby', 'love']
     gPics[6].categories = ['cat', 'smile']
-    gPics[7].categories = ['men', 'smile', 'funny']
+    gPics[7].categories = ['dog', 'love', 'smile']
     gPics[8].categories = ['baby', 'funny', 'smile']
     gPics[9].categories = ['men', 'funny']
     gPics[10].categories = ['men', 'funny']
@@ -61,4 +61,20 @@ function _addCategories() {
     gPics[25].categories = ['cartoon', 'funny']
     gPics[26].categories = ['cartoon', 'funny']
     gPics[27].categories = ['cartoon', 'funny']
+    gPics[28].categories = ['women', 'smile', 'happy']
+    gPics[29].categories = ['men', 'funny']
+    gPics[30].categories = ['men', 'funny']
+    gPics[31].categories = ['baby', 'funny', 'smile']
+    gPics[32].categories = ['men', 'funny', 'smile']
+    gPics[33].categories = ['cartoon', 'funny']
+    gPics[34].categories = ['women', 'sad']
+    gPics[35].categories = ['cartoon', 'funny']
+    gPics[36].categories = ['women', 'funny']
+    gPics[37].categories = ['women', 'happy']
+    gPics[38].categories = ['baby', 'funny']
+    gPics[39].categories = ['men', 'funny']
+    gPics[40].categories = ['cartoon', 'sad']
+    gPics[41].categories = ['men', 'sad']
+    gPics[42].categories = ['men', 'funny']
+    gPics[43].categories = ['men', 'funny']
 }
