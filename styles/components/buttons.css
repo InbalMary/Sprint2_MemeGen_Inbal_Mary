@@ -85,7 +85,7 @@ input[type="color"] {
     place-self: center;
 }
 
-.upload-btn{
+.upload-btn {
     width: 200px;
     font-size: 0.75em;
 }
@@ -123,6 +123,7 @@ input[type="color"] {
     transition: font-size 0.3s ease;
 }
 
-.stickers-container > * {
+.sticker-gallery .stickers-container .sticker-btn {
     font-size: 2em;
+    background-color: var(--clr-primary--2);
 }
