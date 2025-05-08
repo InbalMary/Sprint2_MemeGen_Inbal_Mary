@@ -265,3 +265,7 @@ function deleteMeme(memeId) {
     gSavedMemes.splice(memeIdx, 1)
     saveToStorage(STORAGE_KEY, gSavedMemes)
 }
+
+function setIsSelected(val) {
+    gMeme.lines[gMeme.selectedLineIdx].isSelected = val
+}

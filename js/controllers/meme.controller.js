@@ -98,17 +98,17 @@ function renderMeme() {
         renderImg(img)
 
         curMeme.lines.forEach((line, idx) => {
-                if (!line.pos || !line.pos.x || !line.pos.y) {
-                    const x = gElCanvas.width / 2
-                    var y
-                    if (idx === 0) y = gElCanvas.height * 0.1
-                    else if (idx === 1) y = gElCanvas.height * 0.9
-                    else y = gElCanvas.height * 0.35 + ((line.size + 10))
-                    setPosition(line, idx, x, y)
-                }
-                line.isSelected = (idx === getCurLineIdx() && getCurLineIdx() !== -1)
-                if (!gIsMobile && gEditingLineIdx != idx) drawText(line)
-                if (gIsMobile) drawText(line)
+            if (!line.pos || !line.pos.x || !line.pos.y) {
+                const x = gElCanvas.width / 2
+                var y
+                if (idx === 0) y = gElCanvas.height * 0.1
+                else if (idx === 1) y = gElCanvas.height * 0.9
+                else y = gElCanvas.height * 0.35 + ((line.size + 10))
+                setPosition(line, idx, x, y)
+            }
+            line.isSelected = (idx === getCurLineIdx() && getCurLineIdx() !== -1)
+            if (!gIsMobile && gEditingLineIdx != idx) drawText(line)
+            if (gIsMobile) drawText(line)
         })
     }
     // console.log('meme', curMeme)
@@ -143,7 +143,7 @@ function drawText(line) {
     const { txt, pos, color, strokeColor, size, isSelected, font, align, rotation = 0 } = line
     const x = pos.x
     const y = pos.y
-
+    console.log('isSelected', isSelected)
     gCtx.lineWidth = size / 25
 
     gCtx.save()
@@ -198,6 +198,7 @@ function drawText(line) {
     gCtx.translate(-centerX, -centerY)
 
     if (isSelected) {
+        console.log('if isSelected', isSelected)
         gCtx.strokeStyle = 'black'
         gCtx.strokeRect(w, adjustedH, width, height)
     }
@@ -226,12 +227,24 @@ function onSetLineTxt(elInput) {
     renderMeme()
 }
 
-function onDownloadCanvas(elLink) {
-    const dataUrl = gElCanvas.toDataURL()
+function onDownloadCanvas() {
+    const currentLineIdx = getCurLineIdx()
+    setCurLineIdx(-1)
+    renderMeme()
+    
+    setTimeout(() => {
+        const elLink = document.querySelector('.download a')
+        downloadMeme(elLink)
+        setCurLineIdx(currentLineIdx)
+        renderMeme()
+    }, 50)
+}
 
-    elLink.href = dataUrl
-    // Set a name for the downloaded file
-    elLink.download = 'my-perfect-img'
+function downloadMeme(elLink) {
+    const dataUrl = gElCanvas.toDataURL()
+    elLink.href = dataUrl   
+    elLink.download = 'my-meme'
+    elLink.click()
 }
 
 function onSetColor(color) {

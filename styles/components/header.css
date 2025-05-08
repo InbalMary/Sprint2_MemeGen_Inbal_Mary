@@ -13,3 +13,7 @@
 .main-header>* {
     grid-column: 2;
 }
+
+header .logo {
+    cursor: pointer;
+}
